@@ -1,0 +1,23 @@
+{
+    "name": "root/ednl",
+    "description": "code data structure",
+    "type": "project",
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3",
+        "filp/whoops": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "Renato Soares",
+            "email": "renatosoarespro@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AVLtree\\": "AVLtree/"
+        }
+    }
+}
