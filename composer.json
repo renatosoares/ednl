@@ -1,23 +1,49 @@
 {
-    "name": "root/ednl",
-    "description": "code data structure",
-    "type": "project",
-    "require": {
-
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.3",
-        "filp/whoops": "^2.1"
-    },
+    "name": "EDNL/TREE",
+    "type": "library",
+    "description": "data structure project academic",
+    "keywords": [
+        "EDNL",
+        "TREE"
+    ],
+    "homepage": "https://github.com/EDNL/TREE",
+    "license": "MIT",
     "authors": [
         {
             "name": "Renato Soares",
-            "email": "renatosoarespro@hotmail.com"
+            "email": "renatosoarespro@hotmail.com",
+            "homepage": "https://github.com/renatosoarespro",
+            "role": "Developer"
         }
     ],
+    "require": {
+        "php" : "~5.6|~7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : ">=5.4.3",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
     "autoload": {
         "psr-4": {
-            "AVLtree\\": "AVLtree/"
+            "EDNL\\TREE\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EDNL\\TREE\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
