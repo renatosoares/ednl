@@ -16,7 +16,19 @@ class TestAvlTree extends TestCase
     {
         $testInsert = new AvlTree(false);
 
-        $testInsert->insert(4, 'banana');
+        $testInsert->insert(1, 'banana');
+        $testInsert->insert(2, 'vaca');
+        $testInsert->insert(3, 'morango');
+        $testInsert->insert(4, 'morango');
+        $testInsert->insert(5, 'morango');
+        $testInsert->insert(6, 'morango');
+        $testInsert->insert(7, 'morango');
+        $testInsert->insert(8, 'morango');
+        $testInsert->insert(9, 'morango');
+        $testInsert->insert(10, 'morango');
+        $testInsert->insert(11, 'morango');
+
+        print $testInsert->getRoot();
     }
 
 }

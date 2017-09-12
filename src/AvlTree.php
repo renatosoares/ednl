@@ -133,4 +133,10 @@ class AvlTree
                 return $this->_balanceState['BALANCED'];
         }
     }
+
+    public function getRoot()
+    {
+        return $this->_root;
+    }
+
 }
