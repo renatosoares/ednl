@@ -16,19 +16,22 @@ class TestAvlTree extends TestCase
     {
         $testInsert = new AvlTree(false);
 
-        $testInsert->insert(1, 'banana');
-        $testInsert->insert(2, 'vaca');
-        $testInsert->insert(3, 'morango');
-        $testInsert->insert(4, 'morango');
-        $testInsert->insert(5, 'morango');
-        $testInsert->insert(6, 'morango');
-        $testInsert->insert(7, 'morango');
-        $testInsert->insert(8, 'morango');
-        $testInsert->insert(9, 'morango');
-        $testInsert->insert(10, 'morango');
-        $testInsert->insert(11, 'morango');
+        $testInsert->insert(7, 'primeiro');
+        $testInsert->insert(3, 'segundo');
+        $testInsert->insert(5, 'terceiro');
+        $testInsert->insert(2, 'quarto');
+//        $testInsert->insert(14, 'quinto');
+//        $testInsert->insert(22, 'sexto');
+//        $testInsert->insert(1, 'setimo');
+//        $testInsert->insert(8, 'oitavo');
+//        $testInsert->insert(4, 'nono');
+//        $testInsert->insert(6, 'decimo');
+//        $testInsert->insert(9, 'decimo primeiro');
 
-        print $testInsert->getRoot();
+        $n = $testInsert->getRoot();
+        $testInsert->preOrder($n);
+        print_r($n);
+
     }
 
 }
