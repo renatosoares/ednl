@@ -1,7 +1,7 @@
 <?php
 
 namespace EDNL\TREE;
-// FIXME https://rosettacode.org/wiki/AVL_tree#Java
+
 class AvlTree extends BinarySearchTree
 {
     /** @var Node $root */
@@ -22,12 +22,44 @@ class AvlTree extends BinarySearchTree
         $n = $this->root;
 
         while (true) {
+            if ($n->key == $key) {
+                return false;
+            }
 
+            /** @var Node $parent */
+            $parent = $n;
+
+            /** @var bool $goLeft */
+            $goLeft = $n->key > $key;
+
+            $n = $goLeft ? $n->left : $n->right;
+
+            if ($n == null) {
+                if ($goLeft) {
+                    $parent->left = new Node($key, $parent);
+                } else {
+                    $parent->right = new Node($key, $parent);
+                }
+                $this->rebalance($parent);
+                break;
+            }
         }
+        return true;
+    }
+
+    private function rebalance(Node $parent)
+    {
+
+        $heightLeft = $parent->left ? $parent->left->height : 0 ;
+        $heightRight = $parent->right ? $parent->right->height : 0;
+
+        $height = $heightLeft - $heightRight;
+
+
     }
 
 /*public boolean insert(int key) {
-if (root == null) {
+if (root == NULL) {
 root = new Node(key, null);
 return true;
 }

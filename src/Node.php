@@ -5,19 +5,24 @@ namespace EDNL\TREE;
 class Node
 {
     /** @var int $key */
-    private $key;
+    public $key;
     /** @var int $balance */
-    private $balance;
+    public $balance;
     /** @var int $height */
-    private $height;
+    public $height;
     /** @var Node $left */
-    private $left;
+    public $left;
     /** @var Node $right */
-    private $right;
+    public $right;
     /** @var Node $parent */
-    private $parent;
+    public $parent;
 
-    public function __construct(int $key, Node $parent)
+    /**
+     * Node constructor.
+     * @param int $key
+     * @param Node $parent
+     */
+    public function __construct(int $key, $parent)
     {
         $this->key = $key;
         $this->parent = $parent;
