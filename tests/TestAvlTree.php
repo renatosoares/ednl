@@ -14,19 +14,21 @@ class TestAvlTree extends TestCase
 {
     public function testInsertTree()
     {
-        $testInsert = new AvlTree();
+        $avl = new AvlTree();
 
-        $testInsert->insert(7);
-        $testInsert->insert(3);
-        $testInsert->insert(5);
-        $testInsert->insert(2);
-//        $testInsert->insert(14, 'quinto');
-//        $testInsert->insert(22, 'sexto');
-//        $testInsert->insert(1, 'setimo');
-//        $testInsert->insert(8, 'oitavo');
-//        $testInsert->insert(4, 'nono');
-//        $testInsert->insert(6, 'decimo');
-//        $testInsert->insert(9, 'decimo primeiro');
+        $avl->insert(7);
+        $avl->insert(3);
+        $avl->insert(5);
+        $avl->insert(2);
+        $avl->insert(22);
+        $avl->insert(1);
+        $avl->insert(8);
+        $avl->insert(4);
+        $avl->insert(6);
+        $avl->insert(9);
+        $avl->insert(33);
+        $avl->preOrder($avl->getRoot());
+
 
 
     }
