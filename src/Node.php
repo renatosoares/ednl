@@ -33,7 +33,7 @@ class Node
      */
     public static function isLeaf() : bool
     {
-
+        /*TODO*/
     }
 
     /**
@@ -42,7 +42,7 @@ class Node
      */
     public static function equals($obj) : bool
     {
-
+        /*TODO*/
     }
 
 }
