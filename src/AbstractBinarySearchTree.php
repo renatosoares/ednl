@@ -24,7 +24,7 @@ abstract class AbstractBinarySearchTree
      * @param Node $right
      * @return mixed
      */
-    abstract protected function createNode(int $value, Node $parent, Node $left, Node $right) : Node;
+    abstract protected function createNode(int $value, $parent, $left, $right) : Node;
 
     /**
      *
@@ -76,7 +76,7 @@ abstract class AbstractBinarySearchTree
 
         $newNode = $this->createNode($element, $insertParentNode, null, null);
 
-        if ($insertParentNode::$value > $newNode::$value) {
+        if ($insertParentNode::$value > $newNode::$value) { /*FIXME corrigir falha nessa linha */
             $insertParentNode::$left = $newNode;
         } else {
             $insertParentNode::$right = $newNode;

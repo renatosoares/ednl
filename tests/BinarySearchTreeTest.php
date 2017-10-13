@@ -1,21 +1,18 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: renato
- * Date: 12/10/17
- * Time: 19:33
+ * User: mobister
+ * Date: 13/10/17
+ * Time: 13:19
  */
 
 namespace EDNL\TREE;
 
-class RedBlackTreeTest extends BaseBSTTest
+class BinarySearchTreeTest extends BaseBSTTest
 {
-    /**
-     *
-     */
-    public function testInsert()
+    public function testInsertDelete()
     {
-        $tree = new RedBlackTree();
+        $tree = new BinarySearchTree();
         $tree->insert(20);
         $tree->insert(15);
         $tree->insert(25);

@@ -19,7 +19,7 @@ class BinarySearchTree extends AbstractBinarySearchTree
      * @param Node $right
      * @return mixed
      */
-    protected function createNode(int $value, Node $parent, Node $left, Node $right): Node
+    protected function createNode(int $value, $parent, $left, $right) : Node
     {
         return new Node($value, $parent, $left, $right);
     }
