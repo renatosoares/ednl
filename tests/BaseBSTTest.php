@@ -18,18 +18,18 @@ class BaseBSTTest extends TestCase
      *
      * @param Node $entry
      */
-    protected function testTreeBSTProperties(Node $entry)
+    protected function testTreeBSTProperties($entry)
     {
         if ($entry != null) {
             // propriedades de heap de teste e propriedades BST
-            if ($entry::$left != null) {
-                $this->assertTrue($entry::$value >= $entry::$left::$value);
+            if ($entry->left != null) {
+                $this->assertTrue($entry->value >= $entry->left->value);
             }
-            if ($entry::$right != null) {
-               $this->assertTrue($entry::$value <= $entry::$right::$value);
+            if ($entry->right != null) {
+               $this->assertTrue($entry->value <= $entry->right->value);
             }
-            $this->testTreeBSTProperties($entry::$left);
-            $this->testTreeBSTProperties($entry::$right);
+            $this->testTreeBSTProperties($entry->left);
+            $this->testTreeBSTProperties($entry->right);
         }
     }
 }

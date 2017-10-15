@@ -12,13 +12,13 @@ namespace EDNL\TREE;
 class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
 {
 
-    protected $ColorEnum = [
+    public $ColorEnum = [
         'RED' => 'red',
         'BLACK' => 'black',
     ];
 
     /** @var RedBlackNode $nilNode  */
-    protected static $nilNode = null;
+    protected $nilNode = null;
 
     /**
      * @inheritdoc
@@ -29,11 +29,11 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
     {
         /** @var Node $newNode */
         $newNode = parent::insert($element);
-        $newNode::$left = self::$nilNode;
-        $newNode::$right = self::$nilNode;
+        $newNode->left = $this->nilNode;
+        $newNode->right = $this->nilNode;
         /** @var RedBlackNode $parent */
-        $this->root::$parent = self::$nilNode;
-        $this->insertRBFixup($newNode);
+        $this->root->parent = $this->nilNode;
+        $this->insertRBFixup($newNode); /*FIXME fazer ajustes */
         return $newNode;
     }
 
@@ -44,7 +44,7 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
      * @param Node $deleteNode
      * @return Node
      */
-    protected function deleteProtected(Node $deleteNode) : Node
+    protected function deleteProtected(int $deleteNode) : Node
     {
         /** @var Node $replaceNode */
         $replaceNode = null; // Nó de trilha que substitui removeOrMovedNode
@@ -62,7 +62,7 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
      * @param Node $right
      * @return Node
      */
-    protected function createNode(int $value, Node $parent, Node $left, Node $right): Node
+    protected function createNode(int $value, $parent, $left, $right): Node
     {
         return new RedBlackNode($value, $parent, $left, $right, $this->ColorEnum['RED']);
     }

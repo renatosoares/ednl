@@ -65,21 +65,21 @@ abstract class AbstractBinarySearchTree
         /** @var Node $searchTempNode */
         $searchTempNode = $this->root;
 
-        while ($searchTempNode != null && $searchTempNode::$value != null) {
+        while ($searchTempNode != null && $searchTempNode->value != null) {
             $insertParentNode = $searchTempNode;
-            if ($element < $searchTempNode::$value) {
-                $searchTempNode = $searchTempNode::$left;
+            if ($element < $searchTempNode->value) {
+                $searchTempNode = $searchTempNode->left;
             } else {
-                $searchTempNode = $searchTempNode::$right;
+                $searchTempNode = $searchTempNode->right;
             }
         }
 
         $newNode = $this->createNode($element, $insertParentNode, null, null);
 
-        if ($insertParentNode::$value > $newNode::$value) { /*FIXME corrigir falha nessa linha */
-            $insertParentNode::$left = $newNode;
+        if ($insertParentNode->value > $newNode->value) {
+            $insertParentNode->left = $newNode;
         } else {
-            $insertParentNode::$right = $newNode;
+            $insertParentNode->right = $newNode;
         }
 
         $this->size++;

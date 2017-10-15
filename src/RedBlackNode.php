@@ -18,7 +18,7 @@ class RedBlackNode extends Node
      */
 
     /** @var static RedBlackNode $color */
-    public static $color;
+    public $color;
 
     /**
      * @inheritdoc
@@ -28,20 +28,11 @@ class RedBlackNode extends Node
      * @param Node $right
      * @param $color
      */
-    public static function RedBlackNode(int $value, Node $parent, Node $left, Node $right, $color)
+    public function __construct(int $value, $parent, $left, $right, $color)
     {
-        $parent::Node($value, $parent, $left, $right);
-        self::$color = $color;
+        parent::__construct($value, $parent, $left, $right);
+        $this->color = $color;
     }
-
-    /*    protected static class RedBlackNode extends Node {
-        public ColorEnum color;
-
-        public RedBlackNode(Integer value, Node parent, Node left, Node right, ColorEnum color) {
-            super(value, parent, left, right);
-            this.color = color;
-        }
-    }*/
 }
 
 
