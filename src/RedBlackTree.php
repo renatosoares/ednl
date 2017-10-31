@@ -12,13 +12,20 @@ namespace EDNL\TREE;
 class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
 {
 
+    /** @var array|object  */
     public $ColorEnum = [
         'RED' => 'red',
         'BLACK' => 'black',
     ];
 
     /** @var RedBlackNode $nilNode  */
-    protected $nilNode = null;
+    protected $nilNode = ['value' => null, 'parent' => null, 'left' => null, 'right' => null, 'color' => 'black'];
+
+    public function __construct()
+    {
+        $this->nilNode = (object) $this->nilNode;
+        $this->ColorEnum = (object) $this->ColorEnum;
+    }
 
     /**
      * @inheritdoc
@@ -33,7 +40,7 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
         $newNode->right = $this->nilNode;
         /** @var RedBlackNode $parent */
         $this->root->parent = $this->nilNode;
-        $this->insertRBFixup($newNode); /*FIXME fazer ajustes */
+        $this->insertRBFixup($newNode);
         return $newNode;
     }
 
@@ -64,7 +71,7 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
      */
     protected function createNode(int $value, $parent, $left, $right): Node
     {
-        return new RedBlackNode($value, $parent, $left, $right, $this->ColorEnum['RED']);
+        return new RedBlackNode($value, $parent, $left, $right, $this->ColorEnum->RED);
     }
 
     /**
@@ -90,11 +97,34 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
      * @param Node $node
      * @return Node
      */
-    protected function rotateLeft(Node $node): Node
+    protected function rotateRight(Node $node) : Node
     {
+
         /** @var Node $temp */
-        $temp = $node::$right;
+        $temp = $node->left;
+        $temp->parent = $node->parent;
+
+        $node->left = $temp->right;
+        if ($node->left != $this->nilNode) {
+            $node->left->parent = $node;
+        }
+
+        $temp->right = $node;
+        $node->parent = $temp;
+
+        // temp assumiu o lugar do nó, então agora o pai deve apontar para temp
+        if ($temp->parent != $this->nilNode) {
+            if ($node == $temp->parent->left) {
+                $temp->parent->left = $temp; /*FIXME está igual a o da esquerda*/
+            } else {
+                $temp->parent->right = $temp;
+            }
+        } else {
+            $this->root = $temp;
+        }
+
         return $temp;
+
     }
 
     /**
@@ -103,9 +133,32 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
      * @param Node $node
      * @return Node
      */
-    protected function rotateRight(Node $node) : Node
+    protected function rotateLeft(Node $node): Node
     {
-        /*TODO*/
+        /** @var Node $temp */
+        $temp = $node->right;
+        $temp->parent = $node->parent;
+
+        $node->right = $temp->left;
+        if ($node->right != $this->nilNode) {
+            $node->right->parent = $node;
+        }
+
+        $temp->left = $node;
+        $node->parent = $temp;
+
+        // temp assumiu o lugar do nó, então agora o pai deve apontar para temp
+        if ($temp->parent != $this->nilNode) {
+            if ($node == $temp->parent->left) {
+                $temp->parent->left = $temp;
+            } else {
+                $temp->parent->right = $temp;
+            }
+        } else {
+            $this->root = $temp;
+        }
+
+        return $temp;
     }
 
     /**
@@ -164,61 +217,64 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
         // correcção e o loop pode terminar
         /** @var RedBlackNode $parent */
         /** @var RedBlackNode $color */
-        while ($currentNode::$parent != $this->root && $currentNode::$parent::$color == $this->ColorEnum['RED']) {
+        while ($currentNode->parent != $this->root && $currentNode->parent->color == $this->ColorEnum->RED) {
             /** @var RedBlackNode $parent */
-            $parent = $currentNode::$parent;
+            $parent = $currentNode->parent;
             /** @var RedBlackNode $grandParent */
-            $grandParent = (object) $parent::$parent;
+            $grandParent = $parent->parent;
 
-            if ($parent == $grandParent::$left) {
+            if ($parent == $grandParent->left) {
                 /** @var RedBlackNode $uncle */
                 /** @var RedBlackNode $right */
-                $uncle = $grandParent::$right;
+                $uncle = $grandParent->right;
                 // case1 - tio e pai são ambos vermelhos
                 // recolore ambos para preto
-                if ($uncle::$color == $this->ColorEnum['RED']) {
-                    $parent::$color = $this->ColorEnum['BLACK'];
-                    $uncle::$color = $this->ColorEnum['BLACK'];
-                    $grandParent::$color = $this->ColorEnum['RED'];
+                if ($uncle->color == $this->ColorEnum->RED) {
+                    $parent->color = $this->ColorEnum->BLACK;
+                    $uncle->color = $this->ColorEnum->BLACK;
+                    $grandParent->color = $this->ColorEnum->RED;
                     // avô foi colorido para vermelho, então, na próxima iteração,
                     // verificamos se não quebra a propriedade rubro negra
                     $currentNode = $grandParent;
                 } else { // caso 2/3 tio é negro -
-                    if ($currentNode == $parent::$right) {
+                    if ($currentNode == $parent->right) { // caso 2, primeiro rode a esquerda
                         $currentNode = $parent;
-                        $this->rotateLeft($currentNode);
+                        $this->rotateLeft($currentNode);  /*FIXME pegar o retorno da rotações*/
                     }
                     // não use $parent
-                    $parent::$color = $this->ColorEnum['BLACK']; // caso 3
-                    $grandParent::$color = $this->ColorEnum['RED'];
+                    $parent->color = $this->ColorEnum->BLACK; // caso 3
+                    $grandParent->color = $this->ColorEnum->RED;
                     $this->rotateRight($grandParent);
                 }
-            } elseif ($parent == $grandParent::$right) {
+            } elseif ($parent == $grandParent->right) {
                 /** @var RedBlackNode $uncle */
                 /** @var RedBlackNode $left */
-                $uncle = $grandParent::$left;
+                $uncle = $grandParent->left;
                 // case1 - tio e pai são ambos vermelhos colorem ambos para preto
-                if ($uncle::$color == $this->ColorEnum['RED']) {
-                    $parent::$color = $this->ColorEnum['BLACK'];
-                    $uncle::$color = $this->ColorEnum['BLACK'];
-                    $grandParent::$color = $this->ColorEnum['RED'];
+                if ($uncle->color == $this->ColorEnum->RED) {
+                    $parent->color = $this->ColorEnum->BLACK;
+                    $uncle->color = $this->ColorEnum->BLACK;
+                    $grandParent->color = $this->ColorEnum->RED;
                     // o avô foi recolorido para vermelho, então na próxima
                     // iteração verificamos se não quebra a propriedade rubro negra
                     $currentNode = $grandParent;
                 } else { // caso 2/3 tio é negro - então realizamos rotações
-                    if ($currentNode == $parent::$left) { // case 2, primeiro rotacione para direita
+
+                    if ($currentNode == $parent->left) { // case 2, primeiro rotacione para direita
                         $currentNode = $parent;
                         $this->rotateRight($currentNode);
                     }
+
                     // não use $parent
-                    $parent::$color = $this->ColorEnum['BLACK']; // caso 3
-                    $grandParent::$color = $this->ColorEnum['RED'];
+                    $parent->color = $this->ColorEnum->BLACK; // caso 3
+                    $grandParent->color = $this->ColorEnum->RED;
                     $this->rotateLeft($grandParent);
                 }
             }
         }
-        // Certifique-se de que a raiz é preta no caso de ter vermelho colorido na correção.
-        $this->root::$color = $this->ColorEnum['BLACK'];
+
+        // Certifique-se de que a raiz é preta no caso de ter colorido de vermelho na correção.
+        $this->root->color = $this->ColorEnum->BLACK;
     }
 
 }
