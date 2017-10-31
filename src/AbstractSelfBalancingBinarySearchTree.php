@@ -38,4 +38,38 @@ abstract class AbstractSelfBalancingBinarySearchTree extends AbstractBinarySearc
 
         return $temp;
     }
+    
+    /**
+     * Rotação para direita
+     *
+     * @param Node $node Nó que será rotacionado
+     * @return Node Nó que vai ficar no lugar do nó fornecido após a rotação
+     */
+    protected function rotateRight(Node $node) : Node
+    {
+        /** @var Node $temp */
+        $temp = $node::$left;
+        $temp::$parent = $node::$parent;
+
+        $node::$left = $temp::$right;
+        if ($node::$left != null) {
+            $node::$left::$parent = $node;
+        }
+
+        $temp::$right = $node;
+        $node::$parent = $temp;
+
+        // Temp assumiu o lugar do nó, então agora o pai deve apontar para temp
+        if ($temp::$parent != null) {
+            if ($node == $temp::$parent::$left) {
+                $temp::$parent::$left = $temp;
+            } else {
+                $temp::$parent::$right = $temp;
+            }
+        } else {
+            $this->root = $temp;
+        }
+
+        return $temp;
+    }
 }

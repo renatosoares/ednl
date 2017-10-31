@@ -5,13 +5,13 @@ namespace EDNL\TREE;
 class Node
 {
     /** @var int $value */
-    public static $value;
+    public $value;
     /** @var Node $parent */
-    public static $parent;
+    public $parent;
     /** @var Node $left */
-    public static $left;
+    public $left;
     /** @var Node $right */
-    public static $right;
+    public $right;
 
     /**
      * Node constructor.
@@ -20,12 +20,12 @@ class Node
      * @param Node $left
      * @param Node $right
      */
-    public static function Node(int $value, Node $parent, Node $left, Node $right)
+    public function __construct(int $value, $parent, $left, $right)
     {
-        self::$value = $value;
-        self::$parent = $parent;
-        self::$left = $left;
-        self::$right = $right;
+        $this->value = $value;
+        $this->parent = $parent;
+        $this->left = $left;
+        $this->right = $right;
     }
 
     /**
@@ -33,7 +33,7 @@ class Node
      */
     public static function isLeaf() : bool
     {
-
+        /*TODO*/
     }
 
     /**
@@ -42,7 +42,7 @@ class Node
      */
     public static function equals($obj) : bool
     {
-
+        /*TODO*/
     }
 
 }

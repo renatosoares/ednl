@@ -9,7 +9,18 @@
 namespace EDNL\TREE;
 
 
-class BinarySearchTree extends Tree
+class BinarySearchTree extends AbstractBinarySearchTree
 {
 
+    /**
+     * @param int $value
+     * @param Node $parent
+     * @param Node $left
+     * @param Node $right
+     * @return mixed
+     */
+    protected function createNode(int $value, $parent, $left, $right) : Node
+    {
+        return new Node($value, $parent, $left, $right);
+    }
 }
