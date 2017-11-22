@@ -8,14 +8,13 @@
 
 namespace EDNL\TREE;
 
-
 /**
  * Interface IGraphSimple
  * @package EDNL\TREE
  *
  * @property int $quantityVertex
- * @property Vertex $vertex;
- * @property Edge $matrixAdjacent
+ * @property array $vertex;
+ * @property Edge $matrixAdjacent[[]]
  *
  */
 interface IGraphSimple

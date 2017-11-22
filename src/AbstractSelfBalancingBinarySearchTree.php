@@ -2,7 +2,6 @@
 
 namespace EDNL\TREE;
 
-
 abstract class AbstractSelfBalancingBinarySearchTree extends AbstractBinarySearchTree
 {
     /**

@@ -1,25 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mobister
- * Date: 31/10/17
- * Time: 08:27
- */
 
 namespace EDNL\TREE;
 
 /**
  * Interface IVertex
- * @package EDNL\TREE
  *
+ * @package  EDNL\TREE
  * @property int $key
  * @property float $value
- * @method  __constructor(int $key, double $value)
- *
+ * @method Vertex(int $key, double $value)
  */
+
 interface IVertex
 {
-
     /**
      * @return int
      */

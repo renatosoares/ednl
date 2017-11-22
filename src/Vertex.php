@@ -1,23 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mobister
- * Date: 31/10/17
- * Time: 13:04
- */
 
 namespace EDNL\TREE;
 
-
+/**
+ * @method  Vertex(int $key, double $value)
+ */
 class Vertex implements IVertex
 {
+    /**
+     * @var  int $key
+     */
+    private $key;
 
     /**
-     * @return int
+     * @var  float $value
+     */
+    private $value;
+
+    /**
+     * Vertex constructor.
+     *
+     * @param $key
+     * @param $value
+     */
+    public function __construct($key, $value)
+    {
+        $this->key = $key;
+        $this->value = $value;
+    }
+
+    /**
+     * @return int $key
      */
     public function getKey(): int
     {
-        // TODO: Implement getKey() method.
+        return $this->key;
     }
 
     /**
@@ -26,15 +43,15 @@ class Vertex implements IVertex
      */
     public function setKey(int $key)
     {
-        // TODO: Implement setKey() method.
+        $this->key = $key;
     }
 
     /**
-     * @return float
+     * @return float $value
      */
     public function getValue(): float
     {
-        // TODO: Implement getValue() method.
+        return $this->value;
     }
 
     /**
@@ -43,6 +60,6 @@ class Vertex implements IVertex
      */
     public function setValue(float $value)
     {
-        // TODO: Implement setValue() method.
+        $this->value = $value;
     }
 }

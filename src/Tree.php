@@ -8,7 +8,6 @@
 
 namespace EDNL\TREE;
 
-
 class Tree
 {
 
@@ -45,10 +44,9 @@ class Tree
 
         print_r($n->key . " ");
 
-        if ($n->right != null){
+        if ($n->right != null) {
             $this->inOrder($n->right);
         }
-
     }
 
     /**
@@ -58,10 +56,10 @@ class Tree
      */
     public function postOrder(Node $n)
     {
-        if($n->left != null) {
+        if ($n->left != null) {
             $this->postOrder($n->left);
         }
-        if($n->right != null){
+        if ($n->right != null) {
             $this->postOrder($n->right);
         }
         print_r($n->key . " ");

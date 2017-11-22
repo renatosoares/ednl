@@ -1,16 +1,34 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mobister
- * Date: 31/10/17
- * Time: 13:33
- */
 
 namespace EDNL\TREE;
 
-
+/**
+ * @property Vertex $vertexOrigin
+ * @property Vertex $vertexDestination
+ * @property float $value
+ * @property bool $directed
+ * @method  Edge(Vertex $vertexOrigin, Vertex $vertexDestination, float $value, bool $directed)
+ */
 class Edge implements IEdge
 {
+    private $vertexOrigin;
+    private $vertexDestination;
+    private $value;
+    private $directed;
+    /**
+     * Edge constructor.
+     * @param Vertex $vertexOrigin
+     * @param Vertex $vertexDestination
+     * @param float $value
+     * @param bool $directed
+     */
+    public function __construct(Vertex $vertexOrigin, Vertex $vertexDestination, float $value, bool $directed)
+    {
+        $this->vertexOrigin = $vertexOrigin;
+        $this->vertexDestination = $vertexDestination;
+        $this->value = $value;
+        $this->directed = $directed;
+    }
 
     /**
      * @return Vertex
@@ -18,7 +36,7 @@ class Edge implements IEdge
      */
     public function getVertexOrigin(): Vertex
     {
-        // TODO: Implement getVertexOrigin() method.
+        return $this->vertexOrigin;
     }
 
     /**
@@ -27,7 +45,7 @@ class Edge implements IEdge
      */
     public function setVertexOrigin(Vertex $vertexOrigin)
     {
-        // TODO: Implement setVertexOrigin() method.
+        $this->vertexOrigin = $vertexOrigin;
     }
 
     /**
@@ -35,7 +53,7 @@ class Edge implements IEdge
      */
     public function getVertexDestination(): Vertex
     {
-        // TODO: Implement getVertexDestination() method.
+        return $this->vertexDestination;
     }
 
     /**
@@ -44,7 +62,7 @@ class Edge implements IEdge
      */
     public function setVertexDestination(Vertex $vertexDestination)
     {
-        // TODO: Implement setVertexDestination() method.
+        $this->vertexDestination = $vertexDestination;
     }
 
     /**
@@ -52,7 +70,7 @@ class Edge implements IEdge
      */
     public function getValue(): float
     {
-        // TODO: Implement getValue() method.
+        return $this->value;
     }
 
     /**
@@ -61,7 +79,7 @@ class Edge implements IEdge
      */
     public function setValue(float $value)
     {
-        // TODO: Implement setValue() method.
+        $this->value = $value;
     }
 
     /**
@@ -69,7 +87,7 @@ class Edge implements IEdge
      */
     public function isDirected(): bool
     {
-        // TODO: Implement isDirected() method.
+        return $this->directed;
     }
 
     /**
@@ -78,6 +96,15 @@ class Edge implements IEdge
      */
     public function setDirected(bool $directed)
     {
-        // TODO: Implement setDirected() method.
+        $this->directed = $directed;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return '[' . (string) $this->vertexOrigin . '-' . (string) $this->vertexDestination . ':' . $this->value . ']';
+//        return '[' . $this->value . ']';
     }
 }

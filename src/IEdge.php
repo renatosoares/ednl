@@ -16,7 +16,7 @@ namespace EDNL\TREE;
  * @property Vertex $vertexDestination
  * @property float $value
  * @property bool $directed
- * @method  __constructor(Vertex $vertexOrigin, Vertex $vertexDestination, float $value, bool $directed)
+ * @method Edge(Vertex $vertexOrigin, Vertex $vertexDestination, float $value, bool $directed);
  *
  */
 
@@ -68,7 +68,4 @@ interface IEdge
      * @return void
      */
     public function setDirected(bool $directed);
-
-
-
 }
