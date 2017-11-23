@@ -65,33 +65,24 @@ class GraphSimple implements IGraphSimple
 
         for ($f = 0; $f < $this->quantityVertex + 1; $f++) {
             $gg = 0;
+
+            for ($g = 0; $g < $this->quantityVertex + 1; $g++) {
+
+                if ($f != $index && $g != $index) {
+                    $tempMatrixAdj[$ff][$gg] = $this->matrixAdjacent[$f][$g];
+
+                    if ($g != $index) {
+                        $gg++;
+                    }
+                }
+            }
+            if ($f != $index) {
+                $ff++;
+            }
         }
+
+        $this->matrixAdjacent = $tempMatrixAdj;
     }
-
-
-    /*
- 16     public void removerVertice(Vertices Vertice){
- 17         qtdVertices--;
- 18         int índice=achaÍndice(Vertice.getChave());
- 19         vertices.remove(índice);  // remove o vértice do vector
- 20         // remove linhas e colunas da matriz de adjacência
- 21         Arestas tempMatrizAdj[][]=new Arestas[qtdVertices][qtdVertices];
- 22         int ff=0,gg;
- 23         for(int f=0;f<qtdVertices+1;f++){
- 24             gg=0;
- 25             for(int g=0;g<qtdVertices+1;g++){
- 26                 if(f!=índice && g!=índice){
- 27                   tempMatrizAdj[ff][gg]= matrizAdj[f][g];
- 28                   if(g!=índice)
- 29                       gg++;
- 30                 }
- 31             }
- 32             if(f!=índice)
- 33                 ff++;
- 34         }
- 35         matrizAdj=tempMatrizAdj;
- 36     }
-*/
 
     /**
      *  Insere e retorna uma nova aresta não-dirigida (v1,v2) armazenando o elemento $value
@@ -103,7 +94,8 @@ class GraphSimple implements IGraphSimple
      */
     public function insertEdge(Vertex $vertexOne, Vertex $vertexTwo, float $value): Edge
     {
-        // TODO: Implement insertEdge() method.
+
+
     }
 
     /**
