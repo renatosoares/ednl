@@ -8,12 +8,15 @@
 
 namespace EDNL\TREE;
 
+use ArrayIterator;
+use CachingIterator;
+
 class GraphSimple implements IGraphSimple
 {
     /** @var int $quantityVertex */
     private $quantityVertex;
 
-    /** @var array $vertex */
+    /** @var iterable $vertex */
     private $vertex;
 
     /** @var Edge $matrixAdjacent[[]] */
@@ -94,8 +97,48 @@ class GraphSimple implements IGraphSimple
      */
     public function insertEdge(Vertex $vertexOne, Vertex $vertexTwo, float $value): Edge
     {
+        /** @var Edge $A */
+        $A = new Edge($vertexOne, $vertexTwo, $value);
 
+        $ind1;
 
+    }
+
+    /*
+    public Arestas insereAresta(Vertices VerticeUm, Vertices VerticeDois,
+                             double valor){
+        Arestas A=new Arestas(VerticeUm, VerticeDois, valor);
+        int ind1=achaÍndice(VerticeUm.getChave());
+        int ind2=achaÍndice(VerticeDois.getChave());
+        matrizAdj[ind1][ind2]=matrizAdj[ind2][ind1]=A; // grafo nao orientado
+        return A;
+    }
+*/
+    /**
+     * @param int $key
+     * @return int
+     */
+    private function findIndex(int $key) : int
+    {
+        /** @var iterable $Itemp */
+        $Itemp = $ait = new ArrayIterator($this->vertex);
+        /** @var \CachingIterator $I */
+        $I = new CachingIterator($Itemp);
+
+        /** @var int $ind */
+        $ind = 0;
+
+        while ($I->hasNext()) {
+            /** @var Vertex $v */
+            $v = $I->next();
+            if ($v->getKey() == $key) { // achei
+                return $ind;
+            }
+
+            $ind++;
+        }
+
+        return -1; // não achei
     }
 
     /**
