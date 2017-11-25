@@ -169,7 +169,7 @@ class GraphSimple implements IGraphSimple
     }
 
     /**
-     * Número de arestas incidentes
+     * Número de arestas incidentes do vértice
      *
      * @param Vertex $vertex
      * @return int
@@ -180,13 +180,13 @@ class GraphSimple implements IGraphSimple
     }
 
     /**
-     * Número de nós de G
+     * Número de nós do grafo
      *
      * @return int
      */
     public function order(): int
     {
-        // TODO: Implement order() method.
+        return $this->quantityVertex;
     }
 
     /**
