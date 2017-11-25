@@ -16,7 +16,7 @@ class GraphSimple implements IGraphSimple
     /** @var int $quantityVertex */
     private $quantityVertex;
 
-    /** @var iterable $vertex */
+    /** @var array $vertex */
     private $vertex;
 
     /** @var Edge $matrixAdjacent[[]] */
@@ -38,7 +38,8 @@ class GraphSimple implements IGraphSimple
      */
     public function insertVertex(Vertex $vertex): void
     {
-        // TODO: Implement insertVertex() method.
+        $this->vertex[] = $vertex;
+        $this->quantityVertex = $this->quantityVertex + 1;
     }
 
     /**
@@ -97,7 +98,7 @@ class GraphSimple implements IGraphSimple
      */
     public function insertEdge(Vertex $vertexOne, Vertex $vertexTwo, float $value): Edge
     {
-        /** @var Edge $A */
+        /** @var Edge $a */
         $a = new Edge($vertexOne, $vertexTwo, $value);
 
         $ind1 = $this->findIndex($vertexOne->getKey());
@@ -168,6 +169,8 @@ class GraphSimple implements IGraphSimple
     }
 
     /**
+     * Número de arestas incidentes
+     *
      * @param Vertex $vertex
      * @return int
      */
@@ -177,6 +180,8 @@ class GraphSimple implements IGraphSimple
     }
 
     /**
+     * Número de nós de G
+     *
      * @return int
      */
     public function order(): int
@@ -191,7 +196,7 @@ class GraphSimple implements IGraphSimple
      */
     public function vertex(): array
     {
-        // TODO: Implement vertex() method.
+        return $this->vertex;
     }
 
     /**
@@ -250,13 +255,5 @@ class GraphSimple implements IGraphSimple
     public function isAdjacent(Vertex $v, Vertex $w): bool
     {
         // TODO: Implement isAdjacent() method.
-    }
-
-    /**
-     * @param int $getKey
-     * @return int
-     */
-    private function findIndex(int $getKey) : int
-    {
     }
 }
