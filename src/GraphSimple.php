@@ -98,39 +98,34 @@ class GraphSimple implements IGraphSimple
     public function insertEdge(Vertex $vertexOne, Vertex $vertexTwo, float $value): Edge
     {
         /** @var Edge $A */
-        $A = new Edge($vertexOne, $vertexTwo, $value);
+        $a = new Edge($vertexOne, $vertexTwo, $value);
 
-        $ind1;
+        $ind1 = $this->findIndex($vertexOne->getKey());
+        $ind2 = $this->findIndex($vertexTwo->getKey());
+
+        $this->matrixAdjacent[$ind1][$ind2] = $this->matrixAdjacent[$ind2][$ind1] = $a; // grafo nao orientado
+
+        return $a;
 
     }
 
-    /*
-    public Arestas insereAresta(Vertices VerticeUm, Vertices VerticeDois,
-                             double valor){
-        Arestas A=new Arestas(VerticeUm, VerticeDois, valor);
-        int ind1=achaÍndice(VerticeUm.getChave());
-        int ind2=achaÍndice(VerticeDois.getChave());
-        matrizAdj[ind1][ind2]=matrizAdj[ind2][ind1]=A; // grafo nao orientado
-        return A;
-    }
-*/
     /**
      * @param int $key
      * @return int
      */
     private function findIndex(int $key) : int
     {
-        /** @var iterable $Itemp */
-        $Itemp = $ait = new ArrayIterator($this->vertex);
-        /** @var \CachingIterator $I */
-        $I = new CachingIterator($Itemp);
+        /** @var iterable $iTemp */
+        $iTemp = $ait = new ArrayIterator($this->vertex);
+        /** @var \CachingIterator $i */
+        $i = new CachingIterator($iTemp);
 
         /** @var int $ind */
         $ind = 0;
 
-        while ($I->hasNext()) {
+        while ($i->hasNext()) {
             /** @var Vertex $v */
-            $v = $I->next();
+            $v = $i->next();
             if ($v->getKey() == $key) { // achei
                 return $ind;
             }
