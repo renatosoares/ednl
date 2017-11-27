@@ -26,7 +26,7 @@ class BaseBSTTest extends TestCase
                 $this->assertTrue($entry->value >= $entry->left->value);
             }
             if ($entry->right != null) {
-               $this->assertTrue($entry->value <= $entry->right->value);
+                $this->assertTrue($entry->value <= $entry->right->value);
             }
             $this->testTreeBSTProperties($entry->left);
             $this->testTreeBSTProperties($entry->right);

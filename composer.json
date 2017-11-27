@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php" : "~5.6|~7.0"
+        "php" : "~5.6|~7.1"
     },
     "require-dev": {
         "php-console/php-console": "^3.1",
@@ -26,12 +26,14 @@
     },
     "autoload": {
         "psr-4": {
-            "EDNL\\TREE\\": "src"
+            "EDNL\\TREE\\": "src",
+            "EDNL\\GRAPH\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EDNL\\TREE\\": "tests"
+            "EDNL\\TREE\\": "tests",
+            "EDNL\\GRAPH\\": "tests"
         }
     },
     "scripts": {
