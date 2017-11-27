@@ -1,6 +1,6 @@
 <?php
 
-namespace EDNL\TREE;
+namespace EDNL\GRAPH;
 
 /**
  * @method  Vertex(int $key, double $value)

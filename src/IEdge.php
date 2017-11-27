@@ -6,7 +6,7 @@
  * Time: 08:36
  */
 
-namespace EDNL\TREE;
+namespace EDNL\GRAPH;
 
 /**
  * Interface IEdge

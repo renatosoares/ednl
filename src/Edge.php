@@ -1,6 +1,6 @@
 <?php
 
-namespace EDNL\TREE;
+namespace EDNL\GRAPH;
 
 /**
  * @property Vertex $vertexOrigin
@@ -22,7 +22,7 @@ class Edge implements IEdge
      * @param float $value
      * @param bool $directed
      */
-    public function __construct(Vertex $vertexOrigin, Vertex $vertexDestination, float $value, bool $directed)
+    public function __construct(Vertex $vertexOrigin, Vertex $vertexDestination, float $value = 0.0 , bool $directed = true)
     {
         $this->vertexOrigin = $vertexOrigin;
         $this->vertexDestination = $vertexDestination;

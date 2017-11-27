@@ -6,7 +6,7 @@
  * Time: 13:30
  */
 
-namespace EDNL\TREE;
+namespace EDNL\GRAPH;
 
 /**
  * Interface IGraphSimple

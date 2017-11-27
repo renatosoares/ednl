@@ -6,7 +6,7 @@
  * Time: 12:22
  */
 
-namespace EDNL\TREE;
+namespace EDNL\GRAPH;
 
 use ArrayIterator;
 use CachingIterator;
@@ -38,8 +38,8 @@ class GraphSimple implements IGraphSimple
      */
     public function insertVertex(Vertex $vertex): void
     {
-        $this->vertex[] = $vertex;
         $this->quantityVertex = $this->quantityVertex + 1;
+        $this->vertex[] = $vertex;
     }
 
     /**
@@ -104,7 +104,8 @@ class GraphSimple implements IGraphSimple
         $ind1 = $this->findIndex($vertexOne->getKey());
         $ind2 = $this->findIndex($vertexTwo->getKey());
 
-        $this->matrixAdjacent[$ind1][$ind2] = $this->matrixAdjacent[$ind2][$ind1] = $a; // grafo nao orientado
+        $temp[$ind2][$ind1] = $a; // grafo nao orientado
+        $this->matrixAdjacent[$ind1][$ind2] = clone $temp[$ind2][$ind1]; // grafo nao orientado
 
         return $a;
 
@@ -116,17 +117,17 @@ class GraphSimple implements IGraphSimple
      */
     private function findIndex(int $key) : int
     {
-        /** @var iterable $iTemp */
-        $iTemp = $ait = new ArrayIterator($this->vertex);
+
         /** @var \CachingIterator $i */
-        $i = new CachingIterator($iTemp);
+        $i = new CachingIterator(new ArrayIterator($this->vertex), CachingIterator::FULL_CACHE);
 
         /** @var int $ind */
         $ind = 0;
 
         while ($i->hasNext()) {
             /** @var Vertex $v */
-            $v = $i->next();
+            $i->next();
+            $v = $i->current();
             if ($v->getKey() == $key) { // achei
                 return $ind;
             }
@@ -255,5 +256,18 @@ class GraphSimple implements IGraphSimple
     public function isAdjacent(Vertex $v, Vertex $w): bool
     {
         // TODO: Implement isAdjacent() method.
+    }
+
+
+    public function showMatrix(): void
+    {
+
+        print_r($this->matrixAdjacent);
+//        for ($f = 0; $f < $this->quantityVertex; $f++) {
+//            for ($g = 0; $g < $this->quantityVertex; $g++) {
+//                print_r($this->matrixAdjacent[$f][$g] . " ");
+//            }
+//            print_r("...");
+//        }
     }
 }

@@ -26,12 +26,14 @@
     },
     "autoload": {
         "psr-4": {
-            "EDNL\\TREE\\": "src"
+            "EDNL\\TREE\\": "src",
+            "EDNL\\GRAPH\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EDNL\\TREE\\": "tests"
+            "EDNL\\TREE\\": "tests",
+            "EDNL\\GRAPH\\": "tests"
         }
     },
     "scripts": {

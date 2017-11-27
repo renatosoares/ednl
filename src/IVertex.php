@@ -1,6 +1,6 @@
 <?php
 
-namespace EDNL\TREE;
+namespace EDNL\GRAPH;
 
 /**
  * Interface IVertex
