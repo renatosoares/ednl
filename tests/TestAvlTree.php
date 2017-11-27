@@ -28,9 +28,5 @@ class TestAvlTree extends TestCase
         $avl->insert(9);
         $avl->insert(33);
         $avl->preOrder($avl->getRoot());
-
-
-
     }
-
 }

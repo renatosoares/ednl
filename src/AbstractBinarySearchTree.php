@@ -8,7 +8,6 @@
 
 namespace EDNL\TREE;
 
-
 abstract class AbstractBinarySearchTree
 {
     /** @var Node $root */
@@ -195,7 +194,6 @@ abstract class AbstractBinarySearchTree
      */
     public function printTreePostOrder()
     {
-
     }
 
     /*-------------------PRIVATE HELPER METHODS-------------------*/
@@ -277,5 +275,4 @@ abstract class AbstractBinarySearchTree
     {
         /*TODO*/
     }
-
 }

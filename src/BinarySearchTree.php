@@ -8,7 +8,6 @@
 
 namespace EDNL\TREE;
 
-
 class BinarySearchTree extends AbstractBinarySearchTree
 {
 

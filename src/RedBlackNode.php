@@ -8,8 +8,6 @@
 
 namespace EDNL\TREE;
 
-
-
 class RedBlackNode extends Node
 {
     /**
@@ -34,5 +32,3 @@ class RedBlackNode extends Node
         $this->color = $color;
     }
 }
-
-

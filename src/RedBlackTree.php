@@ -8,7 +8,6 @@
 
 namespace EDNL\TREE;
 
-
 class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
 {
 
@@ -124,7 +123,6 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
         }
 
         return $temp;
-
     }
 
     /**
@@ -276,5 +274,4 @@ class RedBlackTree extends AbstractSelfBalancingBinarySearchTree
         // Certifique-se de que a raiz é preta no caso de ter colorido de vermelho na correção.
         $this->root->color = $this->ColorEnum->BLACK;
     }
-
 }
