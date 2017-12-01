@@ -60,6 +60,8 @@ class GraphSimple implements IGraphSimple
         // remove linha e colunas da matriz de adjacêcia
 
         /** @var Edge $tempMatrixAdj */
+//        Arestas tempMatrizAdj[][]=new Arestas[qtdVertices][qtdVertices];
+
         $tempMatrixAdj[][] = [$this->quantityVertex][$this->quantityVertex];
 
         /** @var int $ff */
@@ -261,7 +263,7 @@ class GraphSimple implements IGraphSimple
 
     public function showMatrix(): void
     {
-
+    /*  TODO saida amigável */
         print_r($this->matrixAdjacent);
 //        for ($f = 0; $f < $this->quantityVertex; $f++) {
 //            for ($g = 0; $g < $this->quantityVertex; $g++) {

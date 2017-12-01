@@ -26,8 +26,8 @@
     },
     "autoload": {
         "psr-4": {
-            "EDNL\\TREE\\": "src",
-            "EDNL\\GRAPH\\": "src"
+            "EDNL\\TREE\\": "src/graph",
+            "EDNL\\GRAPH\\": "src/graph"
         }
     },
     "autoload-dev": {
