@@ -31,20 +31,10 @@ class GraphSimpleTest extends TestCase
 
     public function testRemoveVertex()
     {
-        $graph = $this->testInsertVertex();
+        $graph = $this->testInsertEdge();
 
         /* FIXME verificar inserido */
         $vertex = $graph->vertex();
-
-        $graph->insertEdge($vertex[0], $vertex[1], ($vertex[0]->getValue() + $vertex[1]->getValue()) );
-        $graph->insertEdge($vertex[0], $vertex[2], ($vertex[0]->getValue() + $vertex[2]->getValue()) );
-        $graph->insertEdge($vertex[1], $vertex[3], ($vertex[1]->getValue() + $vertex[2]->getValue()) );
-        $graph->insertEdge($vertex[3], $vertex[1], ($vertex[3]->getValue() + $vertex[1]->getValue()) );
-        $graph->insertEdge($vertex[3], $vertex[2], ($vertex[3]->getValue() + $vertex[2]->getValue()) );
-
-        $graph->showMatrix();
-
-        /*FIXME remover*/
 
         $graph->removeVertex($vertex[3]);
 
@@ -63,9 +53,9 @@ class GraphSimpleTest extends TestCase
         $graph->insertEdge($vertex[3], $vertex[1], ($vertex[3]->getValue() + $vertex[1]->getValue()) );
         $graph->insertEdge($vertex[3], $vertex[2], ($vertex[3]->getValue() + $vertex[2]->getValue()) );
 
-        $graph->insertEdge($vertex[1], $vertex[2], ($vertex[1]->getValue() + $vertex[2]->getValue()) );
+//        $graph->insertEdge($vertex[1], $vertex[2], ($vertex[1]->getValue() + $vertex[2]->getValue()) );
 
-        $graph->showMatrix();
+        return $graph;
     }
 
 }

@@ -61,8 +61,6 @@ class GraphSimple implements IGraphSimple
                 }
             } while ($hasNext);
 
-            $this->matrixAdjacent->offsetExists(0);
-
             $this->matrixAdjacent->setSize($this->quantityVertex);
 
             $this->matrixAdjacent->offsetSet(($this->quantityVertex - 1), new SplFixedArray($this->quantityVertex));
@@ -87,11 +85,11 @@ class GraphSimple implements IGraphSimple
         unset($this->vertex[$index]); // remove o vértice do vector
 
         // remove linha e colunas da matriz de adjacêcia
-
-        /** @var Edge $tempMatrixAdj */
-//        Arestas tempMatrizAdj[][]=new Arestas[qtdVertices][qtdVertices];
-
-//        $tempMatrixAdj[][] = [$this->quantityVertex][$this->quantityVertex];
+        /** @var SplFixedArray $tempMatrixAdj[Edge] */
+        $tempMatrixAdj = new SplFixedArray($this->quantityVertex);
+        foreach ($tempMatrixAdj as $key => $value) {
+            $tempMatrixAdj->offsetSet($key, new SplFixedArray($this->quantityVertex));
+        }
 
         /** @var int $ff */
         $ff = 0;
@@ -104,7 +102,7 @@ class GraphSimple implements IGraphSimple
             for ($g = 0; $g < $this->quantityVertex + 1; $g++) {
 
                 if ($f != $index && $g != $index) {
-                    $tempMatrixAdj[$ff][$gg] = isset($this->matrixAdjacent[$f][$g]) ? $this->matrixAdjacent[$f][$g] : '';
+                    $tempMatrixAdj[$ff][$gg] = $this->matrixAdjacent[$f][$g];
 
                     if ($g != $index) {
                         $gg++;
