@@ -10,6 +10,7 @@ namespace EDNL\GRAPH;
 
 use ArrayIterator;
 use CachingIterator;
+use SplFixedArray;
 
 class GraphSimple implements IGraphSimple
 {
@@ -19,8 +20,8 @@ class GraphSimple implements IGraphSimple
     /** @var array $vertex */
     private $vertex;
 
-    /** @var Edge $matrixAdjacent[[]] */
-    private $matrixAdjacent = [[]];
+    /** @var SplFixedArray $matrixAdjacent */
+    private $matrixAdjacent;
 
     /**
      * GraphSimple constructor.
@@ -40,6 +41,34 @@ class GraphSimple implements IGraphSimple
     {
         $this->quantityVertex = $this->quantityVertex + 1;
         $this->vertex[] = $vertex;
+
+        // cria matrix para a quantidade de vertices
+        if ($this->quantityVertex == 1) {
+            $this->matrixAdjacent = new SplFixedArray($this->quantityVertex);
+            $this->matrixAdjacent->offsetSet(($this->quantityVertex - 1), new SplFixedArray($this->quantityVertex));
+        } else {
+            do {
+                $this->matrixAdjacent->current()->setSize($this->quantityVertex);
+                $this->matrixAdjacent->next();
+
+                $hasNext = $this->matrixAdjacent->valid();
+
+                if (! $hasNext) {
+                    // volta para o início da matrix
+                    do {
+                        $this->matrixAdjacent->rewind();
+                    } while ($this->matrixAdjacent->key() != 0);
+                }
+            } while ($hasNext);
+
+            $this->matrixAdjacent->offsetExists(0);
+
+            $this->matrixAdjacent->setSize($this->quantityVertex);
+
+            $this->matrixAdjacent->offsetSet(($this->quantityVertex - 1), new SplFixedArray($this->quantityVertex));
+        }
+
+
     }
 
     /**
@@ -62,7 +91,7 @@ class GraphSimple implements IGraphSimple
         /** @var Edge $tempMatrixAdj */
 //        Arestas tempMatrizAdj[][]=new Arestas[qtdVertices][qtdVertices];
 
-        $tempMatrixAdj[][] = [$this->quantityVertex][$this->quantityVertex];
+//        $tempMatrixAdj[][] = [$this->quantityVertex][$this->quantityVertex];
 
         /** @var int $ff */
         $ff = 0;
@@ -75,7 +104,7 @@ class GraphSimple implements IGraphSimple
             for ($g = 0; $g < $this->quantityVertex + 1; $g++) {
 
                 if ($f != $index && $g != $index) {
-                    $tempMatrixAdj[$ff][$gg] = $this->matrixAdjacent[$f][$g];
+                    $tempMatrixAdj[$ff][$gg] = isset($this->matrixAdjacent[$f][$g]) ? $this->matrixAdjacent[$f][$g] : '';
 
                     if ($g != $index) {
                         $gg++;
@@ -106,8 +135,8 @@ class GraphSimple implements IGraphSimple
         $ind1 = $this->findIndex($vertexOne->getKey());
         $ind2 = $this->findIndex($vertexTwo->getKey());
 
-        $temp[$ind2][$ind1] = $a; // grafo nao orientado
-        $this->matrixAdjacent[$ind1][$ind2] = clone $temp[$ind2][$ind1]; // grafo nao orientado
+        $this->matrixAdjacent[$ind2][$ind1] = $a; // grafo nao orientado
+        $this->matrixAdjacent[$ind1][$ind2] = $this->matrixAdjacent[$ind2][$ind1]; // grafo nao orientado
 
         return $a;
 
@@ -120,7 +149,7 @@ class GraphSimple implements IGraphSimple
     private function findIndex(int $key) : int
     {
 
-        /** @var \CachingIterator $i */
+        /** @var CachingIterator $i */
         $i = new CachingIterator(new ArrayIterator($this->vertex), CachingIterator::FULL_CACHE);
 
         /** @var int $ind */
