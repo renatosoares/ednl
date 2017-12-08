@@ -141,6 +141,8 @@ class GraphSimple implements IGraphSimple
     }
 
     /**
+     * Acha um vértice por sua chave
+     *
      * @param int $key
      * @return int
      */
@@ -173,9 +175,14 @@ class GraphSimple implements IGraphSimple
      * @param Edge $edge
      * @return void
      */
-    public function removeEdge(Edge $edge): void
+    public function removeEdge(Edge $edge): void // FIXME missing test
     {
-        // TODO: Implement removeEdge() method.
+        /** @var int $ind1 */
+        $ind1 = $this->findIndex($edge->getVertexOrigin()->getKey());
+        /** @var int $ind2 */
+        $ind2 = $this->findIndex($edge->getVertexDestination()->getKey());
+
+        $this->matrixAdjacent[$ind1][$ind2] = $this->matrixAdjacent[$ind2][$ind1] = null;
     }
 
     /**
@@ -184,18 +191,51 @@ class GraphSimple implements IGraphSimple
      * @param float $value
      * @return Edge
      */
-    public function insertBow(Vertex $vertexOne, Vertex $vertexTwo, float $value): Edge
+    public function insertBow(Vertex $vertexOne, Vertex $vertexTwo, float $value = 0.0): Edge // FIXME missing test
     {
-        // TODO: Implement insertBow() method.
+        /** @var Edge $a */
+        $a = new Edge($vertexOne, $vertexTwo, $value, true);
+
+        /** @var int $ind1 */
+        $ind1 = $this->findIndex($vertexOne->getKey());
+        /** @var int $ind2 */
+        $ind2 = $this->findIndex($vertexTwo->getKey());
+
+        $this->matrixAdjacent[$ind1][$ind2] = $a;
+
+        return $a;
     }
 
     /**
      * @param Edge $edge
      * @return void
      */
-    public function removeBow(Edge $edge): void
+    public function removeBow(Edge $edge): void // FIXME missing test
     {
         // TODO: Implement removeBow() method.
+    }
+
+    /**
+     *
+     */
+    public function showVertex(): void // FIXME missing test
+    {
+        for ($f = 0; $f < count($this->vertex); $f++) {
+            print_r($this->vertex[0] . ',' . PHP_EOL);
+        }
+    }
+
+    /**
+     *
+     */
+    public function showMatrix(): void // FIXME missing test
+    {
+        for ($f = 0; $f < $this->quantityVertex; $f++) {
+            for ($g = 0; $g < $this->quantityVertex; $g++) {
+                print_r($this->matrixAdjacent[$f][$g] . PHP_EOL);
+            }
+            print_r("...");
+        }
     }
 
     /**
@@ -232,11 +272,20 @@ class GraphSimple implements IGraphSimple
     /**
      *  Retorna uma coleção de todas as arestas no grafo
      *
-     * @return array
+     * @return array|ArrayIterator
      */
-    public function edge(): array
+    public function edge(): ArrayIterator // FIXME missing test
     {
-        // TODO: Implement edge() method.
+        $v = new ArrayIterator();
+
+        for ($l = 0; $l < $this->quantityVertex; $l++) {
+            for ($c = 0; $c < $this->quantityVertex; $c++) {
+                $v->append($this->matrixAdjacent[$l][$c]);
+            }
+        }
+
+        return $v;
+
     }
 
     /**
@@ -254,11 +303,16 @@ class GraphSimple implements IGraphSimple
      *  Retorna um array armazenando os vértices finais da aresta $e.
      *
      * @param Edge $e
-     * @return array
+     * @return ArrayIterator
      */
-    public function finalVertex(Edge $e): array
+    public function finalVertex(Edge $e): ArrayIterator // FIXME missing test
     {
-        // TODO: Implement finalVertex() method.
+        $v = new ArrayIterator();
+
+        $v->append($e->getVertexOrigin());
+        $v->append($e->getVertexDestination());
+
+        return $v;
     }
 
     /**
@@ -282,21 +336,14 @@ class GraphSimple implements IGraphSimple
      * @param Vertex $w
      * @return bool
      */
-    public function isAdjacent(Vertex $v, Vertex $w): bool
+    public function isAdjacent(Vertex $v, Vertex $w): bool // FIXME missing test
     {
-        // TODO: Implement isAdjacent() method.
+        /** @var int $ind1 */
+        $ind1 = $this->findIndex($v->getKey());
+        /** @var int $ind2 */
+        $ind2 = $this->findIndex($v->getKey());
+
+        return ($this->matrixAdjacent[$ind1][$ind2]) != null;
     }
 
-
-    public function showMatrix(): void
-    {
-    /*  TODO saida amigável */
-        print_r($this->matrixAdjacent);
-//        for ($f = 0; $f < $this->quantityVertex; $f++) {
-//            for ($g = 0; $g < $this->quantityVertex; $g++) {
-//                print_r($this->matrixAdjacent[$f][$g] . " ");
-//            }
-//            print_r("...");
-//        }
-    }
 }

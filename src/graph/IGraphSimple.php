@@ -58,7 +58,7 @@ interface IGraphSimple
      * @param float $value
      * @return Edge
      */
-    public function insertBow(Vertex $vertexOne, Vertex $vertexTwo, float $value) : Edge;
+    public function insertBow(Vertex $vertexOne, Vertex $vertexTwo, float $value = 0.0) : Edge;
 
     /**
      * @param Edge $edge
@@ -87,9 +87,9 @@ interface IGraphSimple
     /**
      *  Retorna uma coleção de todas as arestas no grafo
      *
-     * @return array
+     * @return \ArrayIterator
      */
-    public function edge() : array;
+    public function edge(): \ArrayIterator;
 
     /**
      *  Retorna uma coleção de todas as arestas incidentes sob o vértice $vertex
@@ -105,7 +105,7 @@ interface IGraphSimple
      * @param Edge $e
      * @return array
      */
-    public function finalVertex(Edge $e) : array;
+    public function finalVertex(Edge $e): \ArrayIterator;
 
     /**
      *  Retorna o vértice oposto de $v em $e, ou seja,
