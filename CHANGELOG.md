@@ -1,10 +1,10 @@
 # Changelog
 
-All Notable changes to `TREE` will be documented in this file.
+All Notable changes to `Data structures` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - YYYY-MM-DD
+## 0.0.1 - 2017-12-09
 
 ### Added
 - Nothing

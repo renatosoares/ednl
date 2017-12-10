@@ -27,13 +27,15 @@
     "autoload": {
         "psr-4": {
             "EDNL\\TREE\\": "src/graph",
-            "EDNL\\GRAPH\\": "src/graph"
+            "EDNL\\GRAPH\\": "src/graph",
+            "EDNL\\DIJKSTRA\\": "src/dijkstra"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "EDNL\\TREE\\": "tests",
-            "EDNL\\GRAPH\\": "tests"
+            "EDNL\\GRAPH\\": "tests",
+            "EDNL\\DIJKSTRA\\": "tests"
         }
     },
     "scripts": {
