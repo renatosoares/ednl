@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: renato
- * Date: 09/12/17
- * Time: 21:59
- */
 
 namespace EDNL\DIJKSTRA;
 
