@@ -17,7 +17,8 @@
         }
     ],
     "require": {
-        "php": "~5.6|~7.1"
+        "php": "~5.6|~7.1",
+        "ext-mbstring": "^7.1"
     },
     "require-dev": {
         "psy/psysh": "@stable",
