@@ -5,6 +5,11 @@ use PHPUnit\Framework\TestCase;
 
 class DijkstraTest extends TestCase
 {
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+    }
+
     public function testRelocationCities()
     {
         $matrixCities = [
