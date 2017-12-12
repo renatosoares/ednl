@@ -1,11 +1,19 @@
 <?php
-namespace EDNL\DIJKSTRA;
 
-use PHPUnit\Framework\TestCase;
+namespace EDNL\RUNNER;
 
-class DijkstraTest extends TestCase
+use EDNL\DIJKSTRA\Dijkstra;
+
+class DijkstraBin
 {
-    public function testRelocationCities()
+    public function __construct()
+    {
+    }
+
+    /**
+     *
+     */
+    public function binRelocationCities()
     {
         $matrixCities = [
             [INF,INF,INF,5  ,INF,INF,INF,INF],
@@ -23,7 +31,10 @@ class DijkstraTest extends TestCase
         $d->shortestPath(5, 2);
     }
 
-    public function testMaze()
+    /**
+     *
+     */
+    public function binMaze()
     {
         $trimmed = file('./maze.dat', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
@@ -73,7 +84,7 @@ class DijkstraTest extends TestCase
         $d->shortestPath(2, 8);
     }
 
-    public function testGraphAdjacencyList()
+    public function binGraphAdjacencyList()
     {
         $graph = array(
             'A' => array('B' => 3, 'D' => 3, 'F' => 6),

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: renato
- * Date: 02/11/17
- * Time: 12:22
- */
 
 namespace EDNL\GRAPH;
 
