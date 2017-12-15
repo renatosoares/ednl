@@ -70,10 +70,10 @@ class DijkstraTest extends TestCase
         }
         $d = new Dijkstra($graphMatrix);
 
-        $d->shortestPath(2, 8);
+        $d->shortestPath(2, 5);
     }
 
-    public function testGraphAdjacencyList()
+    public function testRelocationCitiesLinked()
     {
         $graph = array(
             'A' => array('B' => 3, 'D' => 3, 'F' => 6),

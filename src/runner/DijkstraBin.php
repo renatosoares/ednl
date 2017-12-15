@@ -10,9 +10,6 @@ class DijkstraBin
     {
     }
 
-    /**
-     *
-     */
     public function binRelocationCities()
     {
         $matrixCities = [
@@ -31,9 +28,6 @@ class DijkstraBin
         $d->shortestPath(5, 2);
     }
 
-    /**
-     *
-     */
     public function binMaze()
     {
         $trimmed = file('./maze.dat', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -81,10 +75,10 @@ class DijkstraBin
         }
         $d = new Dijkstra($graphMatrix);
 
-        $d->shortestPath(2, 8);
+        $d->shortestPath(2, 5);
     }
 
-    public function binGraphAdjacencyList()
+    public function binRelocationCitiesLinked()
     {
         $graph = array(
             'A' => array('B' => 3, 'D' => 3, 'F' => 6),
