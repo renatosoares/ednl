@@ -31,6 +31,16 @@ class Edge implements IEdge
     }
 
     /**
+     * output values
+     *
+     */
+    public function __toString()
+    {
+//        return 'vertexOrigin => ' . $this->vertexOrigin . ' < -- > vertexDestination => ' . $this->vertexDestination . ' ||-> cost => ' . $this->value;
+        return '||-> cost => ' . $this->value;
+    }
+
+    /**
      * @return Vertex
      *
      */
@@ -99,12 +109,12 @@ class Edge implements IEdge
         $this->directed = $directed;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return '[' . (string) $this->vertexOrigin . '-' . (string) $this->vertexDestination . ':' . $this->value . ']';
-//        return '[' . $this->value . ']';
-    }
+//    /**
+//     * @return string
+//     */
+//    public function __toString()
+//    {
+//        return '[' . $this->vertexOrigin . ' - ' .  $this->vertexDestination . ' : ' . $this->value . ']';
+////        return '[' . $this->value . ']';
+//    }
 }

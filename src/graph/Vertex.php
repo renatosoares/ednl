@@ -30,6 +30,16 @@ class Vertex implements IVertex
     }
 
     /**
+     * output values
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'key => ' . $this->key . ' |-> value => ' . $this->value;
+    }
+
+    /**
      * @return int $key
      */
     public function getKey(): int

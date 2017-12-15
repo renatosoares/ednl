@@ -215,8 +215,9 @@ class GraphSimple implements IGraphSimple
     public function showVertex(): void // FIXME missing test
     {
         for ($f = 0; $f < count($this->vertex); $f++) {
-            print_r($this->vertex[0] . ',' . PHP_EOL);
+            print_r($this->vertex[$f] . ',' . PHP_EOL);
         }
+        print_r(PHP_EOL);
     }
 
     /**
@@ -226,10 +227,13 @@ class GraphSimple implements IGraphSimple
     {
         for ($f = 0; $f < $this->quantityVertex; $f++) {
             for ($g = 0; $g < $this->quantityVertex; $g++) {
-                print_r($this->matrixAdjacent[$f][$g] . PHP_EOL);
+                print_r( '[' . $f . '] => ' . '[' . $g . ']' . $this->matrixAdjacent[$f][$g] . PHP_EOL);
             }
-            print_r("...");
+            print_r('.....................................................' . PHP_EOL);
         }
+        print_r(PHP_EOL);
+        print_r('######################################################' . PHP_EOL);
+        print_r(PHP_EOL);
     }
 
     /**

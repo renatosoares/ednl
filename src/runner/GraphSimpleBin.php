@@ -3,6 +3,7 @@
 namespace EDNL\RUNNER;
 
 use EDNL\GRAPH\GraphSimple;
+use EDNL\GRAPH\Vertex;
 
 class GraphSimpleBin
 {
@@ -19,20 +20,22 @@ class GraphSimpleBin
         $graph->insertVertex($vertex2);
         $graph->insertVertex($vertex3);
 
+        print_r('%%%%%%%% insere vértice %%%%%%%%' . PHP_EOL);
+        $graph->showVertex();
+
         return $graph;
 
     }
 
     public function binRemoveVertex()
     {
-        /** @var GraphSimple $graph */
         $graph = $this->binInsertEdge();
 
-        /* FIXME verificar inserido */
         $vertex = $graph->vertex();
 
-        $graph->removeVertex($vertex[3]);
+        $graph->removeVertex($vertex[2]);
 
+        print_r('%%%%%%%% remove vértice %%%%%%%%' . PHP_EOL);
         $graph->showMatrix();
     }
 
@@ -48,7 +51,10 @@ class GraphSimpleBin
         $graph->insertEdge($vertex[3], $vertex[1], ($vertex[3]->getValue() + $vertex[1]->getValue()) );
         $graph->insertEdge($vertex[3], $vertex[2], ($vertex[3]->getValue() + $vertex[2]->getValue()) );
 
-//        $graph->insertEdge($vertex[1], $vertex[2], ($vertex[1]->getValue() + $vertex[2]->getValue()) );
+        $graph->insertEdge($vertex[1], $vertex[2], ($vertex[1]->getValue() + $vertex[2]->getValue()) );
+
+        print_r('%%%%%%%% insere aresta %%%%%%%%' . PHP_EOL);
+        $graph->showMatrix();
 
         return $graph;
     }
