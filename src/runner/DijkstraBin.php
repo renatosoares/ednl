@@ -3,14 +3,11 @@
 namespace EDNL\RUNNER;
 
 use EDNL\DIJKSTRA\Dijkstra;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DijkstraBin
 {
-    public function __construct()
-    {
-    }
-
-    public function binRelocationCities()
+    public function binRelocationCities($source, $target)
     {
         $matrixCities = [
             [INF,INF,INF,5  ,INF,INF,INF,INF],
@@ -96,5 +93,18 @@ class DijkstraBin
         $d->shortestPath('B', 'F');
         $d->shortestPath('F', 'A');
         $d->shortestPath('A', 'G');
+    }
+
+    /**
+     * Exibe no navegador
+     *
+     * @param Request $request
+     */
+    public function viewRelocationCities(Request $request) {
+        $source = $request->getAttribute('source');
+        $target = $request->getAttribute('target');
+        echo '<pre>';
+        echo $this->binRelocationCities($source, $target);
+        echo '</pre>';
     }
 }

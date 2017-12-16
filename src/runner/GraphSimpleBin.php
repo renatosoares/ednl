@@ -4,6 +4,8 @@ namespace EDNL\RUNNER;
 
 use EDNL\GRAPH\GraphSimple;
 use EDNL\GRAPH\Vertex;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
 class GraphSimpleBin
 {
@@ -27,15 +29,15 @@ class GraphSimpleBin
 
     }
 
-    public function binRemoveVertex()
+    public function binRemoveVertex($vertexRemove)
     {
         $graph = $this->binInsertEdge();
 
         $vertex = $graph->vertex();
 
-        $graph->removeVertex($vertex[2]);
+        $graph->removeVertex($vertex[$vertexRemove]);
 
-        print_r('%%%%%%%% remove vértice %%%%%%%%' . PHP_EOL);
+        print_r('%%%%%%%% remove vértice >> ' . $vertexRemove . ' << %%%%%%%%' . PHP_EOL);
         $graph->showMatrix();
     }
 
@@ -57,6 +59,41 @@ class GraphSimpleBin
         $graph->showMatrix();
 
         return $graph;
+    }
+
+    /**
+     * Exibe insersão de aresta no navegador
+     *
+     */
+    public function viewInsertEdge()
+    {
+        echo '<pre>';
+        echo $this->binInsertEdge();
+        echo '</pre>';
+    }
+
+    /**
+     * Exibe insersão de vértice no navegador
+     *
+     */
+    public function viewInsertVertex()
+    {
+        echo '<pre>';
+        echo $this->binInsertVertex();
+        echo '</pre>';
+    }
+
+    /**
+     * Exibe remoção do grafo no navegador
+     *
+     * @param Request $request
+     */
+    public function viewRemoveVertex(Request $request)
+    {
+        $key = $request->getAttribute('key');
+        echo '<pre>';
+        echo $this->binRemoveVertex($key);
+        echo '</pre>';
     }
 
 }
