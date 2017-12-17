@@ -10,6 +10,8 @@ $app->get('/graph/insert-edge', GraphSimpleBin::class . ':viewInsertEdge');
 $app->get('/graph/insert-vertex', GraphSimpleBin::class . ':viewInsertVertex');
 $app->get('/graph/remove-vertex/{key}', GraphSimpleBin::class . ':viewRemoveVertex');
 
-$app->get('/dijkstra/relocation-cities/{source}/{target}', DijkstraBin::class, ':viewRelocationCities');
+$app->get('/dijkstra/relocation-cities/{source}/{target}', DijkstraBin::class . ':viewRelocationCities');
+$app->get('/dijkstra/relocation-cities-linked', DijkstraBin::class . ':viewRelocationCitiesLinked');
+$app->get('/dijkstra/maze/{source}/{target}', DijkstraBin::class . ':viewMaze');
 
 $app->run();

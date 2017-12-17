@@ -66,7 +66,7 @@ class Dijkstra
 
         // A pilha estará vazia se não houver nenhuma rota de volta
         if ($S->isEmpty()) {
-            echo "No route from $source to $target";
+            echo "Não tem rota de $source para $target";
         }
         else {
             // adicione o nó de origem e imprima o caminho no sentido inverso

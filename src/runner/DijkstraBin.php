@@ -9,6 +9,8 @@ class DijkstraBin
 {
     public function binRelocationCities($source, $target)
     {
+        print_r('Matrix de ligação das Cidades e seus custos' . PHP_EOL);
+        print_r( PHP_EOL);
         $matrixCities = [
             [INF,INF,INF,5  ,INF,INF,INF,INF],
             [INF,INF,INF,4  ,INF,INF,INF,INF],
@@ -22,12 +24,27 @@ class DijkstraBin
 
         $d = new Dijkstra($matrixCities);
 
-        $d->shortestPath(5, 2);
+        foreach ($matrixCities as $key => $row) {
+            print_r('[ ' . $key . ' ] => ' . '[ ');
+            foreach ($row as $key => $column) {
+                if ($key != (count($row) - 1)) {
+                    print_r(' ' . ($column === INF ? INF : ' ' . $column . ' ') . ' ,');
+                } else {
+                    print_r(' ' . ($column === INF ? INF : ' ' . $column . ' '));
+                }
+            }
+            print_r(' ]' . PHP_EOL);
+        }
+
+        print_r( PHP_EOL);
+        print_r('custo : saltos' . PHP_EOL);
+
+        $d->shortestPath($source, $target);
     }
 
-    public function binMaze()
+    public function binMaze($source, $target)
     {
-        $trimmed = file('./maze.dat', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $trimmed = file(dirname(__DIR__) . '/runner/maze.dat', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         $graphMatrix = array_map(function ($string) {
             $value = str_split($string);
@@ -39,8 +56,6 @@ class DijkstraBin
 
             return $v;
         }, $trimmed);
-
-
 
         $firstRow = current($graphMatrix);
 
@@ -67,12 +82,30 @@ class DijkstraBin
 
                 $countTgt++;
             }
-
-
         }
+
         $d = new Dijkstra($graphMatrix);
 
-        $d->shortestPath(2, 5);
+        print_r('Menor caminho do labirinto' . PHP_EOL);
+
+        print_r( PHP_EOL);
+
+        foreach ($graphMatrix as $key => $row) {
+            print_r('[ ' . $key . ' ] => ' . '[ ');
+            foreach ($row as $key => $column) {
+                if ($key != (count($row) - 1)) {
+                    print_r(' ' . ($column === INF ? INF : ' ' . $column . ' ') . ' ,');
+                } else {
+                    print_r(' ' . ($column === INF ? INF : ' ' . $column . ' '));
+                }
+            }
+            print_r(' ]' . PHP_EOL);
+        }
+
+        print_r( PHP_EOL);
+        print_r('custo : saltos' . PHP_EOL);
+
+        $d->shortestPath($source, $target);
     }
 
     public function binRelocationCitiesLinked()
@@ -88,6 +121,25 @@ class DijkstraBin
 
         $d = new Dijkstra($graph);
 
+        print_r('Lista ligada de  ligação das Cidades e seus custos' . PHP_EOL);
+
+        print_r( PHP_EOL);
+
+        foreach ($graph as $key => $row) {
+            print_r('[ ' . $key . ' ] => ' . '[ ');
+            foreach ($row as $key => $column) {
+                if ($key != 'F') {
+                    print_r(' ' . ($column === INF ? INF : ' ' . $column . ' ') . ' ,');
+                } else {
+                    print_r(' ' . ($column === INF ? INF : ' ' . $column . ' '));
+                }
+            }
+            print_r(' ]' . PHP_EOL);
+        }
+
+        print_r( PHP_EOL);
+        print_r('custo : saltos' . PHP_EOL);
+
         $d->shortestPath('D', 'C');
         $d->shortestPath('C', 'A');
         $d->shortestPath('B', 'F');
@@ -100,11 +152,36 @@ class DijkstraBin
      *
      * @param Request $request
      */
-    public function viewRelocationCities(Request $request) {
+    public function viewRelocationCities(Request $request)
+    {
         $source = $request->getAttribute('source');
         $target = $request->getAttribute('target');
         echo '<pre>';
         echo $this->binRelocationCities($source, $target);
+        echo '</pre>';
+    }
+
+    /**
+     * Exibe no navegador
+     *
+     * @param Request $request
+     */
+    public function viewMaze(Request $request)
+    {
+        $source = $request->getAttribute('source');
+        $target = $request->getAttribute('target');
+        echo '<pre>';
+        echo $this->binMaze($source, $target);
+        echo '</pre>';
+    }
+    /**
+     * Exibe no navegador
+     *
+     */
+    public function viewRelocationCitiesLinked()
+    {
+        echo '<pre>';
+        echo $this->binRelocationCitiesLinked();
         echo '</pre>';
     }
 }
