@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: renato
- * Date: 07/10/17
- * Time: 09:55
- */
 
 namespace EDNL\TREE;
 
