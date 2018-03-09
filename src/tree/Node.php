@@ -2,6 +2,8 @@
 
 namespace EDNL\TREE;
 
+use PhpParser\Node\Expr\Cast\Object_;
+
 class Node
 {
     /** @var int $value */
@@ -20,7 +22,7 @@ class Node
      * @param Node $left
      * @param Node $right
      */
-    public function __construct(int $value, $parent, $left, $right)
+    public function __construct(int $value, Node $parent, Node $left, Node $right)
     {
         $this->value = $value;
         $this->parent = $parent;
@@ -31,16 +33,21 @@ class Node
     /**
      * @return bool
      */
-    public static function isLeaf() : bool
+    public static function isLeaf(): bool
     {
         /*TODO*/
     }
 
+    public function hashCode(): int
+    {
+        // TODO Implement
+    }
+
     /**
-     * @param $obj
+     * @param object $obj
      * @return bool
      */
-    public static function equals($obj) : bool
+    public function equals(object $obj): bool
     {
         /*TODO*/
     }

@@ -1,29 +1,35 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: renato
- * Date: 03/10/17
- * Time: 10:28
- */
 
 namespace EDNL\TREE;
 
+/**
+ * Implementação de árvore de pesquisa binária abstrata. É basicamente totalmente
+ * implementada árvore de pesquisa binária, apenas o método de modelo é fornecido
+ * para criar Nó (outras árvores podem ter nós ligeiramente diferentes com mais
+ * informações). Desta forma, algum código da árvore de pesquisa binária padrão
+ * pode ser reutilizado para outros tipos de binário
+ */
+
 abstract class AbstractBinarySearchTree
 {
-    /** @var Node $root */
+    /** @var Node $root Nó raiz onde toda a árvore começa. */
     public $root;
 
-    /** @var  int $size */
+    /** @var  int $size Tamanho da árvore*/
     protected $size;
 
     /**
-     * @param int $value
-     * @param Node $parent
+     * Como esta é a classe abstrata e várias árvores têm informações adicionais diferentes
+     * em subclasses de nós diferentes, usa esse método abstrato para criar nós (talvez da
+     * classe {@link Node} ou talvez alguma sub classe de nó diferente).
+     *
+     * @param int $value Valor esse nó terá
+     * @param Node $parent Pai do nó
      * @param Node $left
      * @param Node $right
      * @return mixed
      */
-    abstract protected function createNode(int $value, $parent, $left, $right) : Node;
+    abstract protected function createNode(int $value, Node $parent, Node $left, Node $right): Node;
 
     /**
      *
@@ -32,7 +38,7 @@ abstract class AbstractBinarySearchTree
      * @param int $element
      * @return Node
      */
-    public function search(int $element) : Node
+    public function search(int $element): Node
     {
         /** @var Node $node */
         $node = $this->root;
@@ -50,7 +56,7 @@ abstract class AbstractBinarySearchTree
      * @param int $element
      * @return Node
      */
-    public function insert(int $element) : Node
+    public function insert(int $element): Node
     {
         if ($this->root == null) {
             $this->root = $this->createNode($element, null, null, null);
@@ -87,13 +93,12 @@ abstract class AbstractBinarySearchTree
     }
 
     /**
-     *
-     * Retorna um nó com o elemento passado se ele existir
+     * Remove um nó com o elemento passado se ele existir
      *
      * @param int $element
      * @return Node
      */
-    public function delete(int $element) : Node
+    public function delete(int $element): Node
     {
         /*TODO*/
     }
@@ -104,7 +109,7 @@ abstract class AbstractBinarySearchTree
      * @param int $element : Nó que precisa se excluído
      * @return Node : Novo nó que está no lugar do nó excluído. Ou nulo se o elemento para * delete não foi encontrado.
      */
-    protected function deleteProtected(int $element) : Node
+    protected function deleteProtected(int $element): Node
     {
         /*TODO*/
     }
@@ -116,7 +121,7 @@ abstract class AbstractBinarySearchTree
      * @param Node $newNode
      * @return Node Novo nó substituído
      */
-    private function transplant(Node $nodeToReplace, Node $newNode) : Node
+    private function transplant(Node $nodeToReplace, Node $newNode): Node
     {
         /*TODO*/
     }
@@ -124,9 +129,9 @@ abstract class AbstractBinarySearchTree
     /**
      *
      * @param int $element
-     * @return Node Retorna true se conter elemento
+     * @return bool Retorna true se conter elemento
      */
-    public function contains(int $element) : Node
+    public function contains(int $element): bool
     {
         return $this->search($element) != null;
     }
@@ -134,7 +139,7 @@ abstract class AbstractBinarySearchTree
     /**
      * @return int Menor elemento da árvore
      */
-    public function getMinimum() : int
+    public function getMinimum(): int
     {
         /*TODO*/
     }
@@ -142,7 +147,7 @@ abstract class AbstractBinarySearchTree
     /**
      * @return int Maior elemento da árvore.
      */
-    public function getMaximum() : int
+    public function getMaximum(): int
     {
         /*TODO*/
     }
@@ -162,7 +167,7 @@ abstract class AbstractBinarySearchTree
     /**
      * @return int retorna número de elementos da árvore
      */
-    public function getSize() : int
+    public function getSize(): int
     {
         return $this->size;
     }
@@ -172,7 +177,7 @@ abstract class AbstractBinarySearchTree
      *
      * @return void
      */
-    public function printTreeInOrder()
+    public function printTreeInOrder(): void
     {
         /*TODO*/
     }
@@ -182,17 +187,17 @@ abstract class AbstractBinarySearchTree
      *
      * @return void
      */
-    public function printTreePreOrder()
+    public function printTreePreOrder(): void
     {
             /*TODO*/
     }
 
     /**
-     * Árvore traversal com impressão dos valores dos elementos. Método pré ordem.
+     * Árvore traversal com impressão dos valores dos elementos. Método pós ordem.
      *
-     *@return void
+     * @return void
      */
-    public function printTreePostOrder()
+    public function printTreePostOrder(): void
     {
     }
 
@@ -203,7 +208,7 @@ abstract class AbstractBinarySearchTree
      *
      * @param Node $entry
      */
-    private function printTreeInOrderPrivate(Node $entry)
+    private function printTreeInOrderPrivate(Node $entry): void
     {
         /*TODO*/
     }
@@ -213,7 +218,7 @@ abstract class AbstractBinarySearchTree
      *
      * @param Node $entry
      */
-    private function printTreePreOrderPrivate(Node $entry)
+    private function printTreePreOrderPrivate(Node $entry): void
     {
         /*TODO*/
     }
@@ -223,7 +228,7 @@ abstract class AbstractBinarySearchTree
      *
      * @param Node $entry
      */
-    private function printTreePostOrderPrivate(Node $entry)
+    private function printTreePostOrderPrivate(Node $entry): void
     {
         /*TODO*/
     }
@@ -232,7 +237,7 @@ abstract class AbstractBinarySearchTree
      * @param Node $node
      * @return Node
      */
-    protected function getMinimumProtected(Node $node) : Node
+    protected function getMinimumProtected(Node $node): Node
     {
         /*TODO*/
     }
@@ -241,13 +246,17 @@ abstract class AbstractBinarySearchTree
      * @param Node $node
      * @return Node
      */
-    protected function getMaximumProtected(Node $node) : Node
+    protected function getMaximumProtected(Node $node): Node
     {
         /*TODO */
     }
 
 
-    protected function getSuccessorProtected(Node $node) : Node
+    /**
+     * @param Node $node
+     * @return Node
+     */
+    protected function getSuccessorProtected(Node $node): Node
     {
         /*TODO*/
     }
@@ -256,21 +265,35 @@ abstract class AbstractBinarySearchTree
 
     //-------------------------------- TREE PRINTING ------------------------------------
 
-    public function printTree()
+    /**
+     *
+     */
+    public function printTree(): void
     {
         $this->printSubtree($this->root);
     }
 
-    public function printSubtree(Node $node)
+    /**
+     * @param Node $node
+     */
+    public function printSubtree(Node $node): void
     {
         /*TODO*/
     }
 
-    private function printNodeValue(Node $node)
+    /**
+     * @param Node $node
+     */
+    private function printNodeValue(Node $node): void
     {
-        /*TODO*/
+
     }
 
+    /**
+     * @param Node $node
+     * @param bool $isRight
+     * @param string $indent
+     */
     private function printTreePrivate(Node $node, bool $isRight, string $indent)
     {
         /*TODO*/
