@@ -13,10 +13,10 @@ class BinarySearchTreeTest extends BaseBSTTest
     public function testInsertDelete()
     {
         $tree = new BinarySearchTree();
-        $tree->insert(20);
-        $tree->insert(15);
-        $tree->insert(25);
-        $tree->insert(10);
+//        $tree->insert(10);
+//        $tree->insert(16);
+//        $tree->insert(1);
+//        $tree->insert(8);
 //        $this->assertTrue($tree->contains(10));
 //        $this->assertTrue($tree->contains(16));
 //        $this->assertTrue($tree->contains(1));

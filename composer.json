@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "EDNL\\TREE\\": "src/graph",
+            "EDNL\\TREE\\": "src/tree",
             "EDNL\\GRAPH\\": "src/graph",
             "EDNL\\DIJKSTRA\\": "src/dijkstra",
             "EDNL\\RUNNER\\": "src/runner"

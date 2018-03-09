@@ -18,7 +18,7 @@ class BaseBSTTest extends TestCase
      *
      * @param Node $entry
      */
-    protected function testTreeBSTProperties($entry)
+    protected function testTreeBSTProperties(Node $entry): void
     {
         if ($entry != null) {
             // propriedades de heap de teste e propriedades BST
