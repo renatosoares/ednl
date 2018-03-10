@@ -101,23 +101,58 @@ abstract class AbstractBinarySearchTree
     /**
      * Remove um nó com o elemento passado se ele existir
      *
-     * @param int $element
+     * @param int $element Elemento que será removido
      * @return Node Novo nó que está no lugar do nó excluído. Ou nulo se o elemento para apagar não foi encontrado.
      */
     public function delete(int $element): Node
     {
+        /** @var Node $deleteNode */
+        $deleteNode = $this->search($element);
 
+        if ($deleteNode != null) {
+            return $this->deleteProtected($deleteNode);
+        } else {
+            return null;
+        }
     }
 
-    /**
+   /**
      * Lógica para deletar quando o nó é encontrado
      *
-     * @param int $element : Nó que precisa se excluído
-     * @return Node : Novo nó que está no lugar do nó excluído. Ou nulo se o elemento para * delete não foi encontrado.
+     * @param Node $deleteNode Nó que precisa se excluído
+     * @return Node Novo nó que está no lugar do nó excluído. Ou nulo se o elemento para * delete não foi encontrado.
      */
-    protected function deleteProtected(int $element): Node
+    protected function deleteProtected(Node $deleteNode): ?Node
     {
-        /*TODO*/
+        if ($deleteNode != null) {
+            /** @var Node $nodeToReturn */
+            $nodeToReturn = null;
+
+            if ($deleteNode != null) {
+                if ($deleteNode->left == null) {
+                    $nodeToReturn = $this->transplant($deleteNode, $deleteNode->right);
+                } elseif ($deleteNode->right == null) {
+                    $nodeToReturn = $this->transplant($deleteNode, $deleteNode->left);
+                } else {
+                    /** @var Node $successorNode */
+                    $successorNode = $this->getMaximumProtected($deleteNode->right);
+
+                    if ($successorNode->parent != $deleteNode) {
+                        $this->transplant($successorNode, $successorNode->right);
+                        $successorNode->right = $deleteNode->right;
+                        $successorNode->right->parent = $successorNode;
+                    }
+
+                    $this->transplant($deleteNode, $successorNode);
+                    $successorNode->left = $deleteNode->left;
+                    $successorNode->left->parent = $successorNode;
+                    $nodeToReturn = $successorNode;
+                }
+                $this->size--;
+            }
+            return $nodeToReturn;
+        }
+        return null;
     }
 
     /**
