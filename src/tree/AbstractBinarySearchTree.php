@@ -29,7 +29,7 @@ abstract class AbstractBinarySearchTree
      * @param Node $right
      * @return mixed
      */
-    abstract protected function createNode(int $value, Node $parent, Node $left, Node $right): Node;
+    abstract protected function createNode(int $value, ?Node $parent, ?Node $left, ?Node $right): Node;
 
     /**
      *
@@ -38,12 +38,18 @@ abstract class AbstractBinarySearchTree
      * @param int $element
      * @return Node
      */
-    public function search(int $element): Node
+    public function search(int $element): ?Node
     {
         /** @var Node $node */
         $node = $this->root;
 
-        /* TODO */
+        while ($node != null && $node->value != null && $node->value != $element) {
+            if ($element < $node->value) {
+                $node = $node->left;
+            } else {
+                $node = $node->right;
+            }
+        }
 
         return $node;
     }
@@ -96,11 +102,11 @@ abstract class AbstractBinarySearchTree
      * Remove um nó com o elemento passado se ele existir
      *
      * @param int $element
-     * @return Node
+     * @return Node Novo nó que está no lugar do nó excluído. Ou nulo se o elemento para apagar não foi encontrado.
      */
     public function delete(int $element): Node
     {
-        /*TODO*/
+
     }
 
     /**

@@ -22,7 +22,7 @@ class Node
      * @param Node $left
      * @param Node $right
      */
-    public function __construct(int $value, Node $parent, Node $left, Node $right)
+    public function __construct(int $value, ?Node $parent, ?Node $left, ?Node $right)
     {
         $this->value = $value;
         $this->parent = $parent;
