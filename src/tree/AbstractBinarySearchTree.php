@@ -193,7 +193,7 @@ abstract class AbstractBinarySearchTree
      */
     public function getMinimum(): int
     {
-        /*TODO*/
+        return $this->getMinimumProtected($this->root)->value;
     }
 
     /**
@@ -201,7 +201,7 @@ abstract class AbstractBinarySearchTree
      */
     public function getMaximum(): int
     {
-        /*TODO*/
+        return $this->getMaximumProtected($this->root)->value;
     }
 
 
@@ -303,7 +303,11 @@ abstract class AbstractBinarySearchTree
      */
     protected function getMaximumProtected(Node $node): Node
     {
-        /*TODO */
+        while ($node->right != null) {
+            $node = $node->right;
+        }
+
+        return $node;
     }
 
 
