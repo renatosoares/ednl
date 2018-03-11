@@ -104,7 +104,7 @@ abstract class AbstractBinarySearchTree
      * @param int $element Elemento que será removido
      * @return Node Novo nó que está no lugar do nó excluído. Ou nulo se o elemento para apagar não foi encontrado.
      */
-    public function delete(int $element): Node
+    public function delete(int $element): ?Node
     {
         /** @var Node $deleteNode */
         $deleteNode = $this->search($element);
@@ -135,7 +135,7 @@ abstract class AbstractBinarySearchTree
                     $nodeToReturn = $this->transplant($deleteNode, $deleteNode->left);
                 } else {
                     /** @var Node $successorNode */
-                    $successorNode = $this->getMaximumProtected($deleteNode->right);
+                    $successorNode = $this->getMinimumProtected($deleteNode->right);
 
                     if ($successorNode->parent != $deleteNode) {
                         $this->transplant($successorNode, $successorNode->right);
@@ -162,9 +162,20 @@ abstract class AbstractBinarySearchTree
      * @param Node $newNode
      * @return Node Novo nó substituído
      */
-    private function transplant(Node $nodeToReplace, Node $newNode): Node
+    private function transplant(?Node $nodeToReplace, ?Node $newNode): ?Node
     {
-        /*TODO*/
+        if ($nodeToReplace->parent == null) {
+            $this->root = $newNode;
+        } elseif ($nodeToReplace == $nodeToReplace->parent->left) {
+            $nodeToReplace->parent->left = $newNode;
+        } else {
+            $nodeToReplace->parent->right = $newNode;
+        }
+
+        if ($newNode != null) {
+            $newNode->parent = $nodeToReplace->parent;
+        }
+        return $newNode;
     }
 
     /**
@@ -280,7 +291,10 @@ abstract class AbstractBinarySearchTree
      */
     protected function getMinimumProtected(Node $node): Node
     {
-        /*TODO*/
+        while ($node->left != null) {
+            $node = $node->left;
+        }
+        return $node;
     }
 
     /**

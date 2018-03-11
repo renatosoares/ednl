@@ -28,4 +28,19 @@ class BinarySearchTreeTest extends BaseBSTTest
 
         $this->testTreeBSTProperties($tree->root);
     }
+
+    public function testSize()
+    {
+        /** @var BinarySearchTree $tree */
+        $tree = new BinarySearchTree();
+        $tree->insert(10);
+        $tree->insert(16);
+        $tree->insert(1);
+        $this->assertEquals($tree->getSize(), 3);
+        $tree->delete(16);
+        $this->assertEquals($tree->getSize(), 2);
+        $tree->delete(16);
+        $this->assertEquals($tree->getSize(), 2);
+    }
+
 }
