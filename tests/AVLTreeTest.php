@@ -19,12 +19,12 @@ class AVLTreeTest extends BaseBSTTest
         $tree->insert(25);
         $tree->insert(23);
         $this->assertEquals($tree->getSize(), 4);
-//        $tree->delete(15); // A raiz agora é rotação desequilibrada realizada
-//        $this->assertEquals($tree->getSize(), 3);
-//        $this->assertEquals($tree->root->value, 23); // nova raiz
-//        $this->assertEquals(($tree->root)->height, 1); // nova raiz
-//        $this->assertEquals($tree->root->left->value, 20);
-//        $this->assertEquals($tree->root->right->value, 25);
+        $tree->delete(15); // A raiz agora é rotação desequilibrada realizada
+        $this->assertEquals($tree->getSize(), 3);
+        $this->assertEquals($tree->root->value, 23); // nova raiz
+        $this->assertEquals(($tree->root)->height, 1); // nova raiz
+        $this->assertEquals($tree->root->left->value, 20);
+        $this->assertEquals($tree->root->right->value, 25);
 
         $this->testTreeBSTProperties($tree->root);
     }

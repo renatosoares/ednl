@@ -40,9 +40,37 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      * @param int $element
      * @return Node
      */
-    public function delete(int $element): Node
+    public function delete(int $element): ?Node
     {
-        // TODO: implement
+        /** @var Node $deleteNode */
+        $deleteNode = $this->search($element);
+
+        if ($deleteNode != null) {
+            /** @var Node $successorNode */
+            $successorNode = parent::deleteProtected($deleteNode);
+            if ($successorNode != null) {
+                // Se substituído do getMinimum($deleteNode->right), então volte e atualize a altura
+                /**
+                 * @var AVLNode $minimum
+                 * @var AVLNode $successorNode->right
+                 * @var AVLNode $successorNode
+                 */
+                $minimum = $successorNode->right != null ? $this->getMinimumProtected($successorNode->right) : $successorNode;
+
+                $this->recomputeHeight($minimum);
+                /** @var AVLNode $minimum */
+                $this->rebalance($minimum);
+
+            } else {
+                /** @var AVLNode $deleteNode->parent */
+                $this->recomputeHeight($deleteNode->parent);
+                $this->rebalance($deleteNode->parent);
+            }
+
+            return $successorNode;
+        }
+
+        return null;
     }
 
     /**
@@ -186,11 +214,19 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
 
     /**
      * Recompõe informações de altura do nó, e sobe para todos os pais. Precisa ser feito depois de excluir.
-     *
+     * @param AVLNode $node
      */
     private function recomputeHeight(AVLNode $node): void
     {
-        // TODO Implement
+        while ($node != null) {
+            /**
+             * @var AVLNode $node->left
+             * @var AVLNode $node->right
+             * @var AVLNode $node->parent
+             */
+            $node->height = $this->maxHeight($node->left, $node->right) + 1;
+            $node = $node->parent;
+       }
     }
 
     /**
@@ -200,9 +236,16 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      * @param AVLNode $node2
      * @return int
      */
-    private function maxHeight(AVLNode $node1, AVLNode $node2): int
+    private function maxHeight(?AVLNode $node1, ?AVLNode $node2): int
     {
-        // TODO Implement
+        if ($node1 != null && $node2 != null) {
+            return $node1->height > $node2->height ? $node1->height : $node2->height;
+        } else if ($node1 == null) {
+            return $node2 != null ? $node2->height : -1;
+        } else if ($node2 == null) {
+            return $node1 != null ? $node1->height : -1;
+        }
+        return -1;
     }
 
     /**
