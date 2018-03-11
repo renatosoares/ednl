@@ -72,6 +72,8 @@ class BinarySearchTreeTest extends BaseBSTTest
         $tree->insert(9);
         $this->assertEquals($tree->getSuccessor(15), 17);
         $this->assertEquals($tree->getSuccessor(13), 15);
+
+        $tree->printTree();
     }
 
 }

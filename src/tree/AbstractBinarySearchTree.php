@@ -356,7 +356,15 @@ abstract class AbstractBinarySearchTree
      */
     public function printSubtree(Node $node): void
     {
-        /*TODO*/
+        if ($node->right != null) {
+            $this->printTreePrivate($node->right, true, "");
+        }
+
+        $this->printNodeValue($node);
+
+        if ($node->left != null) {
+            $this->printTreePrivate($node->left, false, "");
+        }
     }
 
     /**
@@ -364,7 +372,12 @@ abstract class AbstractBinarySearchTree
      */
     private function printNodeValue(Node $node): void
     {
-
+        if ($node->value == null) {
+            print '<null>';
+        } else {
+            print $node->value;
+        }
+        printf('%1$s', PHP_EOL);
     }
 
     /**
@@ -374,6 +387,23 @@ abstract class AbstractBinarySearchTree
      */
     private function printTreePrivate(Node $node, bool $isRight, string $indent)
     {
-        /*TODO*/
+        if ($node->right != null) {
+            $this->printTreePrivate($node->right, true, $indent . ($isRight ? '        ' : ' |      '));
+        }
+
+        print $indent;
+
+        if ($isRight) {
+            print ' /';
+        } else {
+            print ' \\';
+        }
+
+        print '----- ';
+        $this->printNodeValue($node);
+
+        if ($node->left != null) {
+            $this->printTreePrivate($node->left, false, $indent . ($isRight ? ' |      ' : '        '));
+        }
     }
 }
