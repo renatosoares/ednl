@@ -1,6 +1,7 @@
 <?php
 use \EDNL\RUNNER\GraphSimpleBin;
 use \EDNL\RUNNER\DijkstraBin;
+use \EDNL\RUNNER\TreeAVLBin;
 
 require dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
@@ -13,5 +14,8 @@ $app->get('/graph/remove-vertex/{key}', GraphSimpleBin::class . ':viewRemoveVert
 $app->get('/dijkstra/relocation-cities/{source}/{target}', DijkstraBin::class . ':viewRelocationCities');
 $app->get('/dijkstra/relocation-cities-linked', DijkstraBin::class . ':viewRelocationCitiesLinked');
 $app->get('/dijkstra/maze/{source}/{target}', DijkstraBin::class . ':viewMaze');
+
+$app->get('/tree/avl/insert[/{params:.*}]', TreeAVLBin::class . ':insert');
+$app->get('/tree/avl/delete[/{params:.*}]', TreeAVLBin::class . ':delete');
 
 $app->run();
