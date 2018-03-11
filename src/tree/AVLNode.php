@@ -21,7 +21,7 @@ class AVLNode extends Node
      * @param Node $left
      * @param Node $right
      */
-    public function __construct(int $value, $parent, $left, $right)
+    public function __construct(int $value, ?Node $parent, ?Node $left, ?Node $right)
     {
         parent::__construct($value, $parent, $left, $right);
     }

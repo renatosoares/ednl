@@ -2,8 +2,6 @@
 
 namespace EDNL\TREE;
 
-use PhpParser\Node\Expr\Cast\Object_;
-
 class Node
 {
     /** @var int $value */

@@ -54,9 +54,9 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      * @param Node $right
      * @return mixed
      */
-    protected function createNode(int $value, $parent, $left, $right): Node
+    protected function createNode(int $value, ?Node $parent, ?Node $left, ?Node $right): Node
     {
-        // TODO: Implement createNode() method.
+        return new AVLNode($value, $parent, $left, $right);
     }
 
     /**
@@ -68,7 +68,54 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      */
     private function rebalance(AVLNode $node): void
     {
-        // TODO:  Implement
+        while ($node != null) {
+
+            /** @var Node $parent */
+            $parent = $node->parent;
+
+            /**
+             * @var int $leftHeight
+             * @var AVLNode $node->left
+             */
+            $leftHeight = ($node->left == null) ? -1 : ($node->left)->height;
+
+            /**
+             * @var int $rightHeight
+             * @var AVLNode $node->right
+             */
+            $rightHeight = ($node->right == null) ? -1 : ($node->right)->height;
+
+            /** @var int $nodeBalance */
+            $nodeBalance = $rightHeight - $leftHeight;
+
+            // rebalanceamento (-2 significa subárvore à esquerda, 2 significa subárvore direito)
+            if ($nodeBalance == 2) {
+                if ($node->right->right != null) {
+                    /** @var AVLNode $node */
+                    $node = $this->avlRotateLeft($node);
+                    break;
+                } else {
+                    /** @var AVLNode $node */
+                    $node = $this->doubleRotateRightLeft($node);
+                    break;
+                }
+            } elseif ($nodeBalance == -2) {
+                if ($node->left->left != null) {
+                    /** @var AVLNode $node */
+                    $node = $this->avlRotateRight($node);
+                    break;
+                } else {
+                    /** @var AVLNode $node */
+                    $node = $this->doubleRotateLeftRight($node);
+                    break;
+                }
+            } else {
+                self::updateHeight($node);
+            }
+
+            /** @var AVLNode $node */
+            $node = $parent;
+        }
     }
 
 
@@ -80,7 +127,17 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      */
     private function avlRotateLeft(Node $node): Node
     {
-        // TODO: Implement
+        /** @var Node $temp */
+        $temp = parent::rotateLeft($node);
+
+        /**
+         * @var AVLNode $temp->right
+         * @var AVLNode $temp
+         */
+        self::updateHeight($temp->left);
+        self::updateHeight($temp);
+
+        return $temp;
     }
 
     /**
@@ -91,7 +148,17 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      */
     private function avlRotateRight(Node $node): Node
     {
-        // TODO: Implement
+        /** @var Node $temp */
+        $temp = parent::rotateRight($node);
+
+        /**
+         * @var AVLNode $temp->right
+         * @var AVLNode $temp
+         */
+        self::updateHeight($temp->right);
+        self::updateHeight($temp);
+
+        return $temp;
     }
 
     /**
@@ -101,7 +168,8 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      */
     protected function doubleRotateRightLeft(Node $node): Node
     {
-        // TODO Implement
+        $node->right = $this->avlRotateRight($node->right);
+        return $this->avlRotateLeft($node);
     }
 
     /**
@@ -112,7 +180,8 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
      */
     protected function doubleRotateLeftRight(Node $node): Node
     {
-        // TODO Implement
+        $node->left = $this->avlRotateLeft($node->left);
+        return $this->avlRotateRight($node);
     }
 
     /**
@@ -138,10 +207,22 @@ class AVLTree extends AbstractSelfBalancingBinarySearchTree
 
     /**
      * Atualiza altura e balanceia o nó
+     * @param AVLNode $node
      */
     private static final function updateHeight(AVLNode $node): void
     {
-        // TODO Implement
+        /**
+         * @var int $leftHeight
+         * @var AVLNode $node->left
+         */
+        $leftHeight = ($node->left == null) ? -1 : ($node->left)->height;
+
+        /**
+         * @var int $rightHeight
+         * @var AVLNode $node->right
+         */
+        $rightHeight = ($node->right == null) ? -1 : ($node->right)->height;
+        $node->height = 1 + max($leftHeight, $rightHeight);
     }
 
 }
