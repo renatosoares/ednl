@@ -206,14 +206,14 @@ abstract class AbstractBinarySearchTree
 
 
     /**
-     * Obter o elemento elemento seguinte que é maior que o elemento fornecido
+     * Obter o elemento seguinte que é maior que o elemento fornecido
      *
      * @param int $element Elemento para quem o elemento descendente é pesquisado
      * @return int Valor sucessor
      */
     public function getSuccessor(int $element) : int
     {
-        /*TODO*/
+        return $this->getSuccessorProtected($this->search($element))->value;
     }
 
     /**
@@ -317,7 +317,26 @@ abstract class AbstractBinarySearchTree
      */
     protected function getSuccessorProtected(Node $node): Node
     {
-        /*TODO*/
+        // Se houver um ramo direito, então o sucessor é o nó mais à esquerda disso
+        // subtree
+        if ($node->right != null) {
+            return $this->getMinimumProtected($node->right);
+        } else { // caso contrário, é um antepassado mais baixo, cuja o filho esquerdo também é
+            // antecessor do $node
+            /** @var Node $currentNode */
+            $currentNode = $node;
+            /** @var Node $parentNode */
+            $parentNode = $node->parent;
+
+            while ($parentNode != null && $currentNode == $parentNode->right) {
+                // Vá até encontrar o pai que currentNode não está na direita
+                // subtree
+                $currentNode = $parentNode;
+                $parentNode = $parentNode->parent;
+            }
+
+            return $parentNode;
+        }
     }
 
 

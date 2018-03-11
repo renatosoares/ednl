@@ -43,7 +43,6 @@ class BinarySearchTreeTest extends BaseBSTTest
         $this->assertEquals($tree->getSize(), 2);
     }
 
-    //
     public function testMinimumMaximum()
     {
         /** @var BinarySearchTree $tree */
@@ -56,5 +55,23 @@ class BinarySearchTreeTest extends BaseBSTTest
         $this->assertEquals($tree->getMaximum(), 16);
     }
 
+    public function testGetSuccessor()
+    {
+        /** @var BinarySearchTree  $tree */
+        $tree = new BinarySearchTree();
+        $tree->insert(15);
+        $tree->insert(6);
+        $tree->insert(18);
+        $tree->insert(17);
+        $tree->insert(20);
+        $tree->insert(3);
+        $tree->insert(7);
+        $tree->insert(2);
+        $tree->insert(4);
+        $tree->insert(13);
+        $tree->insert(9);
+        $this->assertEquals($tree->getSuccessor(15), 17);
+        $this->assertEquals($tree->getSuccessor(13), 15);
+    }
 
 }
