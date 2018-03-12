@@ -6,26 +6,46 @@
  * Time: 14:08
  */
 
-namespace EDNL\RUNNER;
+namespace EDNL\CONTROLLERS;
 
 use EDNL\TREE\AVLTree;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Cookies;
+use Slim\Http\Response;
 
-class TreeAVLBin
+class TreeAVLController
 {
+
+    /**
+     * TreeAVLBin constructor.
+     * @param $container
+     */
+    public function __construct($container) {
+        $this->container = $container;
+    }
+
     /**
      * @param Request $request
      * @param $response
      * @param $args
+     * @return mixed
      */
-    public function insert(Request $request, $response, $args)
+    public function insert(Request $request, Response $response, $args)
     {
+        if (isset($_COOKIE['value_node'])) {
+            $args['params'] = $_COOKIE['value_node'];
+        } else {
+            setcookie('value_node', $args['params'], time()+3600, '/', 'ednl.d3v');
+        }
+
         $params = explode('/', $args['params']);
         $treeAvl = $this->insertAvl($params);
-        
+
+
         echo '<pre>';
         $treeAvl->printTree();
         echo '</pre>';
+
     }
 
 
@@ -36,11 +56,16 @@ class TreeAVLBin
      */
     public function delete(Request $request, $response, $args)
     {
-        $params = explode('/', $args['params']);
+        if (isset($_COOKIE['value_node'])) {
+            $nodes['keys'] = $_COOKIE['value_node'];
+        } else {
+            var_dump('insira chaves para os nós'); die();
+        }
 
-        $deleteValue = array_pop($params);
+        $delete_nodes = explode('/', $args['params']);
+        $insert_nodes = explode('/', $nodes['keys']);
 
-        $treeAvl = $this->insertAvl($params);
+        $treeAvl = $this->insertAvl($insert_nodes);
 
         echo '<pre>';
         $treeAvl->printTree();
@@ -50,13 +75,15 @@ class TreeAVLBin
         print '-------------------------------';
         print PHP_EOL;
 
-        print $deleteValue;
+        print $delete_nodes;
 
         print PHP_EOL;
         print '-------------------------------';
         print PHP_EOL;
 
-        $treeAvl->delete((int) $deleteValue);
+        foreach ($delete_nodes as $delete_node) {
+            $treeAvl->delete((int) $delete_node);
+        }
 
         echo '<pre>';
         $treeAvl->printTree();

@@ -32,7 +32,7 @@
             "EDNL\\TREE\\": "src/tree",
             "EDNL\\GRAPH\\": "src/graph",
             "EDNL\\DIJKSTRA\\": "src/dijkstra",
-            "EDNL\\RUNNER\\": "src/runner"
+            "EDNL\\CONTROLLERS\\": "src/controllers"
         }
     },
     "autoload-dev": {

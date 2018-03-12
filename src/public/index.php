@@ -1,7 +1,7 @@
 <?php
-use \EDNL\RUNNER\GraphSimpleBin;
-use \EDNL\RUNNER\DijkstraBin;
-use \EDNL\RUNNER\TreeAVLBin;
+use \EDNL\CONTROLLERS\GraphSimpleBin;
+use \EDNL\CONTROLLERS\DijkstraBin;
+use \EDNL\CONTROLLERS\TreeAVLController;
 
 require dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
@@ -15,7 +15,7 @@ $app->get('/dijkstra/relocation-cities/{source}/{target}', DijkstraBin::class . 
 $app->get('/dijkstra/relocation-cities-linked', DijkstraBin::class . ':viewRelocationCitiesLinked');
 $app->get('/dijkstra/maze/{source}/{target}', DijkstraBin::class . ':viewMaze');
 
-$app->get('/tree/avl/insert[/{params:.*}]', TreeAVLBin::class . ':insert');
-$app->get('/tree/avl/delete[/{params:.*}]', TreeAVLBin::class . ':delete');
+$app->get('/tree/avl/insert[/{params:.*}]', TreeAVLController::class . ':insert');
+$app->get('/tree/avl/delete[/{params:.*}]', TreeAVLController::class . ':delete');
 
 $app->run();

@@ -1,6 +1,6 @@
 <?php
 
-namespace EDNL\RUNNER;
+namespace EDNL\CONTROLLERS;
 
 use EDNL\GRAPH\GraphSimple;
 use EDNL\GRAPH\Vertex;

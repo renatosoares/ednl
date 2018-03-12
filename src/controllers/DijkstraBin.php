@@ -1,6 +1,6 @@
 <?php
 
-namespace EDNL\RUNNER;
+namespace EDNL\CONTROLLERS;
 
 use EDNL\DIJKSTRA\Dijkstra;
 use Psr\Http\Message\ServerRequestInterface as Request;
